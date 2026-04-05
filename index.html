@@ -1,51 +1,420 @@
-1â€“2
-months
-Code rehab
-2â€“4
-months
-Build + design
-4â€“5
-months
-Target + apply
-5â€“6
-months
-Negotiate
-Phase 1: Code rehab
-Phase 2: Build + design
-Phase 3: Target + apply
-Phase 4: Negotiate
-Comp targets
-Skill map
-Phase 1 â€” Code rehabilitation (months 1â€“2)
-Your biggest interview risk is coding atrophy, not lack of AI knowledge. Fix this first â€” everything else depends on it.
-Critical
-DAILY DSA GRIND
 
-2 problems/day on LeetCode â€” medium first, hard after week 3
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
 
-Core patterns: sliding window, two-pointer, trees, graphs, DP (top 15 patterns)
+  .roadmap-wrap { padding: 1rem 0 2rem; }
 
-Target: 120â€“150 problems done by end of month 2
+  .phase-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .ptab {
+    padding: 7px 16px; border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    font-size: 13px; cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary);
+    transition: all .15s;
+  }
+  .ptab.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
 
-Blind 75 + Neetcode 150 as base lists
+  .phase-panel { display: none; }
+  .phase-panel.active { display: block; }
 
-Time yourself from week 4 onward â€” 30 min per medium
-BACKEND FUNDAMENTALS REFRESH
+  .phase-header {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 16px 20px;
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    border: 0.5px solid var(--color-border-tertiary);
+    margin-bottom: 16px;
+  }
+  .phase-badge {
+    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 500; white-space: nowrap; margin-top: 2px;
+  }
+  .badge-orange { background: #FAEEDA; color: #633806; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; }
+  .badge-teal   { background: #E1F5EE; color: #085041; }
+  .badge-coral  { background: #FAECE7; color: #712B13; }
+  @media (prefers-color-scheme: dark) {
+    .badge-orange { background: #412402; color: #FAC775; }
+    .badge-purple { background: #26215C; color: #AFA9EC; }
+    .badge-teal   { background: #04342C; color: #5DCAA5; }
+    .badge-coral  { background: #4A1B0C; color: #F0997B; }
+  }
 
-Concurrency: thread pools, executors, CompletableFuture, race conditions
+  .phase-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .phase-sub   { font-size: 12px; color: var(--color-text-secondary); }
 
-JVM internals: GC basics, heap tuning, memory model
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
 
-DB deep dive: indexing, query plans, ACID, isolation levels
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 14px 16px;
+  }
+  .card-label { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px; }
+  .task-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; color: var(--color-text-primary); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+  .dot-orange { background: #EF9F27; }
+  .dot-purple { background: #7F77DD; }
+  .dot-teal   { background: #1D9E75; }
+  .dot-coral  { background: #D85A30; }
 
-Kafka fundamentals: partitions, consumer groups, exactly-once semantics
+  .risk-box {
+    background: var(--color-background-danger);
+    border: 0.5px solid var(--color-border-danger);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 12px; color: var(--color-text-danger);
+    margin-bottom: 8px; line-height: 1.5;
+  }
+  .tip-box {
+    background: var(--color-background-success);
+    border: 0.5px solid var(--color-border-success);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 12px; color: var(--color-text-success);
+    margin-bottom: 8px; line-height: 1.5;
+  }
 
-Spring internals: DI lifecycle, AOP, transaction propagation
-Honest risk: If you haven't coded seriously in 12â€“18 months, your first 3 weeks will feel humiliating. Medium problems will take 60â€“90 minutes. This is normal â€” push through it. Comfort with hard mediums is the bar for Tier-1 SDE-2.
-Fintech angle: your LOS + workflow domain knowledge is a genuine differentiator at Razorpay, PhonePe, CRED, Stripe India. Frame every interview story around scale: "our LOS processed X loan applications/day, here's how we handled Y bottleneck."
-120+
-LC problems
-2h/day
-minimum effort
-week 3
-start mocks
+  .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .metric-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px; text-align: center;
+  }
+  .metric-val { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+  .metric-lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  .comp-bar { margin-top: 16px; }
+  .comp-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .comp-label { font-size: 12px; color: var(--color-text-secondary); min-width: 100px; }
+  .comp-track { flex: 1; height: 8px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
+  .comp-fill { height: 100%; border-radius: 4px; }
+  .comp-val { font-size: 12px; font-weight: 500; color: var(--color-text-primary); min-width: 52px; text-align: right; }
+
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+  .skill-pill {
+    padding: 6px 10px; border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-tertiary);
+    font-size: 12px; color: var(--color-text-secondary);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .priority-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .overview-timeline {
+    display: flex; gap: 0; margin-bottom: 20px; overflow: hidden;
+    border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary);
+  }
+  .tl-seg {
+    flex: 1; padding: 12px 10px; text-align: center; cursor: pointer;
+    border-right: 0.5px solid var(--color-border-tertiary); transition: opacity .15s;
+  }
+  .tl-seg:last-child { border-right: none; }
+  .tl-seg:hover { opacity: .8; }
+  .tl-num { font-size: 18px; font-weight: 500; }
+  .tl-mo { font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; }
+  .tl-name { font-size: 11px; font-weight: 500; margin-top: 6px; }
+  .seg-orange { background: #FAEEDA; }
+  .seg-purple { background: #EEEDFE; }
+  .seg-teal   { background: #E1F5EE; }
+  .seg-coral  { background: #FAECE7; }
+  @media (prefers-color-scheme: dark) {
+    .seg-orange { background: #412402; } .seg-purple { background: #26215C; }
+    .seg-teal   { background: #04342C; } .seg-coral  { background: #4A1B0C; }
+    .tl-name { color: var(--color-text-primary); }
+  }
+</style>
+
+<div class="roadmap-wrap">
+
+  <div class="overview-timeline">
+    <div class="tl-seg seg-orange" onclick="setTab(0)">
+      <div class="tl-num" style="color:#BA7517">1–2</div>
+      <div class="tl-mo">months</div>
+      <div class="tl-name" style="color:#854F0B">Code rehab</div>
+    </div>
+    <div class="tl-seg seg-purple" onclick="setTab(1)">
+      <div class="tl-num" style="color:#534AB7">2–4</div>
+      <div class="tl-mo">months</div>
+      <div class="tl-name" style="color:#3C3489">Build + design</div>
+    </div>
+    <div class="tl-seg seg-teal" onclick="setTab(2)">
+      <div class="tl-num" style="color:#0F6E56">4–5</div>
+      <div class="tl-mo">months</div>
+      <div class="tl-name" style="color:#085041">Target + apply</div>
+    </div>
+    <div class="tl-seg seg-coral" onclick="setTab(3)">
+      <div class="tl-num" style="color:#993C1D">5–6</div>
+      <div class="tl-mo">months</div>
+      <div class="tl-name" style="color:#712B13">Negotiate</div>
+    </div>
+  </div>
+
+  <div class="phase-tabs">
+    <button class="ptab active" onclick="setTab(0)">Phase 1: Code rehab</button>
+    <button class="ptab" onclick="setTab(1)">Phase 2: Build + design</button>
+    <button class="ptab" onclick="setTab(2)">Phase 3: Target + apply</button>
+    <button class="ptab" onclick="setTab(3)">Phase 4: Negotiate</button>
+    <button class="ptab" onclick="setTab(4)">Comp targets</button>
+    <button class="ptab" onclick="setTab(5)">Skill map</button>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-panel active" id="panel-0">
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Phase 1 — Code rehabilitation (months 1–2)</div>
+        <div class="phase-sub">Your biggest interview risk is coding atrophy, not lack of AI knowledge. Fix this first — everything else depends on it.</div>
+      </div>
+      <div class="phase-badge badge-orange">Critical</div>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <div class="card-label">Daily DSA grind</div>
+        <div class="task-item"><div class="dot dot-orange"></div>2 problems/day on LeetCode — medium first, hard after week 3</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Core patterns: sliding window, two-pointer, trees, graphs, DP (top 15 patterns)</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Target: 120–150 problems done by end of month 2</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Blind 75 + Neetcode 150 as base lists</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Time yourself from week 4 onward — 30 min per medium</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Backend fundamentals refresh</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Concurrency: thread pools, executors, CompletableFuture, race conditions</div>
+        <div class="task-item"><div class="dot dot-orange"></div>JVM internals: GC basics, heap tuning, memory model</div>
+        <div class="task-item"><div class="dot dot-orange"></div>DB deep dive: indexing, query plans, ACID, isolation levels</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Kafka fundamentals: partitions, consumer groups, exactly-once semantics</div>
+        <div class="task-item"><div class="dot dot-orange"></div>Spring internals: DI lifecycle, AOP, transaction propagation</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="risk-box">Honest risk: If you haven't coded seriously in 12–18 months, your first 3 weeks will feel humiliating. Medium problems will take 60–90 minutes. This is normal — push through it. Comfort with hard mediums is the bar for Tier-1 SDE-2.</div>
+      <div class="tip-box">Fintech angle: your LOS + workflow domain knowledge is a genuine differentiator at Razorpay, PhonePe, CRED, Stripe India. Frame every interview story around scale: "our LOS processed X loan applications/day, here's how we handled Y bottleneck."</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-card"><div class="metric-val" style="color:#BA7517">120+</div><div class="metric-lbl">LC problems</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#BA7517">2h/day</div><div class="metric-lbl">minimum effort</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#BA7517">week 3</div><div class="metric-lbl">start mocks</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-panel" id="panel-1">
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Phase 2 — Build + system design (months 2–4)</div>
+        <div class="phase-sub">Build your flagship project AND strengthen system design in parallel. These compound each other.</div>
+      </div>
+      <div class="phase-badge badge-purple">High impact</div>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <div class="card-label">Flagship project: config-driven orchestration</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Core: rule/workflow engine with YAML/JSON-driven pipeline config</div>
+        <div class="task-item"><div class="dot dot-purple"></div>AI layer: LLM integration for decision explanations + anomaly flagging</div>
+        <div class="task-item"><div class="dot dot-purple"></div>RAG component: embed loan policy docs, query against them</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Observability: structured logs, metrics, tracing (Prometheus + Grafana)</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Ship it deployed — a live URL beats a GitHub repo every time</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Write one detailed engineering blog post about its architecture</div>
+      </div>
+      <div class="card">
+        <div class="card-label">System design mastery</div>
+        <div class="task-item"><div class="dot dot-purple"></div>HLD: URL shortener, notification system, rate limiter, Uber-like dispatch, payment ledger</div>
+        <div class="task-item"><div class="dot dot-purple"></div>LLD: design a workflow engine, parking lot, LRU cache, pub/sub</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Read: Designing Data-Intensive Applications (Kleppmann) — chapters 5, 6, 9, 11</div>
+        <div class="task-item"><div class="dot dot-purple"></div>Practice: 2 HLD mocks/week from month 3 onward</div>
+        <div class="task-item"><div class="dot dot-purple"></div>AI system design: design a RAG pipeline, LLM gateway, vector search at scale</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="risk-box">Project trap: "planning to integrate AI capabilities" is not the same as doing it. Set a hard scope by end of week 2 of Phase 2 and don't expand it. A working narrow system > an ambitious half-built one.</div>
+      <div class="tip-box">The orchestration platform is perfect for your profile — it directly maps to your LOS experience, shows architectural thinking, and gives concrete AI integration stories. It will carry your interviews.</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-card"><div class="metric-val" style="color:#534AB7">1</div><div class="metric-lbl">deployed project</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#534AB7">20+</div><div class="metric-lbl">HLD designs done</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#534AB7">8+</div><div class="metric-lbl">LLD designs done</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-panel" id="panel-2">
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Phase 3 — Target, apply, interview (months 4–5)</div>
+        <div class="phase-sub">Apply in two tiers. Tier A is your real target. Tier B builds interview fitness and gives you competitive offers for leverage.</div>
+      </div>
+      <div class="phase-badge badge-teal">Execution</div>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <div class="card-label">Tier A targets (50–80 LPA range)</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Razorpay, PhonePe, CRED — fintech DNA matches perfectly</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Zepto, Meesho, Swiggy — hyper-growth, SDE-3 range</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Atlassian India, Adobe India — stable 55–75 LPA</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Stripe India — fintech premium, if hiring</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Microsoft (SDE-2 upgrade path) — process is long, start early</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Tier B (interview reps + leverage)</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Amazon SDE-2 — high volume, gives offer letters fast</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Groww, Jupiter, Perfios — fintech SDE-2/3</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Apply 5–8 Tier B simultaneously for offer overlap</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Use Tier B offers to anchor salary conversations with Tier A</div>
+        <div class="task-item"><div class="dot dot-teal"></div>Referrals > cold apply: activate LinkedIn connections now</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="tip-box">Do 6–8 mock interviews (Pramp, Interviewing.io, or peers) before your first real interview. Treat your first 3 real interviews as paid practice — don't waste Tier A on your first week of applying.</div>
+      <div class="risk-box">Google/Meta are possible but require 6+ months of prep and a different interview style (harder DSA, behaviorals). Include them only if you're willing to extend to 9–12 months.</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-card"><div class="metric-val" style="color:#0F6E56">8+</div><div class="metric-lbl">mock interviews</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#0F6E56">15+</div><div class="metric-lbl">active applications</div></div>
+      <div class="metric-card"><div class="metric-val" style="color:#0F6E56">2+</div><div class="metric-lbl">competing offers</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-panel" id="panel-3">
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Phase 4 — Offer and negotiation (month 5–6)</div>
+        <div class="phase-sub">Most engineers leave 5–15 LPA on the table by accepting first offers. Don't be that person.</div>
+      </div>
+      <div class="phase-badge badge-coral">High leverage</div>
+    </div>
+    <div class="cols">
+      <div class="card">
+        <div class="card-label">Negotiation playbook</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Never reveal your current salary first — it anchors you at 37 LPA</div>
+        <div class="task-item"><div class="dot dot-coral"></div>State a target range: "I'm looking at 60–70 LPA based on market"</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Always negotiate, even if you want to accept — ask once, clearly</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Use competing offers explicitly: "I have another offer at X, can you match?"</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Negotiate total comp: fixed + variable + ESOPs + joining bonus separately</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Offer evaluation checklist</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Fixed component target: 45–55 LPA fixed minimum</div>
+        <div class="task-item"><div class="dot dot-coral"></div>ESOP vesting schedule: 4-year cliff vs monthly — matters a lot</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Variable/bonus structure: guaranteed vs performance-linked</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Growth trajectory: SDE-2 now → SDE-3 in 18 months is better than senior SDE-3 with no headroom</div>
+        <div class="task-item"><div class="dot dot-coral"></div>Joining bonus if notice period > 30 days</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="tip-box">Your solutioning + cross-functional experience is a premium signal for SDE-3 consideration at some companies. Frame it as "technical leadership without a formal title" — not as reduced coding. This can push you from SDE-2 to SDE-3 band in offers.</div>
+    </div>
+  </div>
+
+  <!-- COMP TARGETS -->
+  <div class="phase-panel" id="panel-4">
+    <div style="margin-bottom:16px">
+      <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Realistic compensation targets by company tier</div>
+      <div style="font-size:12px;color:var(--color-text-secondary)">Based on your 6.5 years + fintech domain. Ranges include variable. ESOPs separate.</div>
+    </div>
+    <div class="comp-bar">
+      <div class="comp-item">
+        <div class="comp-label">Google SDE-3</div>
+        <div class="comp-track"><div class="comp-fill" style="width:95%;background:#7F77DD"></div></div>
+        <div class="comp-val">90–140 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Microsoft SDE-2/3</div>
+        <div class="comp-track"><div class="comp-fill" style="width:72%;background:#534AB7"></div></div>
+        <div class="comp-val">60–90 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Razorpay / PhonePe</div>
+        <div class="comp-track"><div class="comp-fill" style="width:65%;background:#1D9E75"></div></div>
+        <div class="comp-val">55–80 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Zepto / Meesho</div>
+        <div class="comp-track"><div class="comp-fill" style="width:60%;background:#1D9E75"></div></div>
+        <div class="comp-val">50–70 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Amazon SDE-2</div>
+        <div class="comp-track"><div class="comp-fill" style="width:55%;background:#EF9F27"></div></div>
+        <div class="comp-val">45–65 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Adobe / Atlassian</div>
+        <div class="comp-track"><div class="comp-fill" style="width:55%;background:#EF9F27"></div></div>
+        <div class="comp-val">50–70 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Groww / CRED</div>
+        <div class="comp-track"><div class="comp-fill" style="width:48%;background:#BA7517"></div></div>
+        <div class="comp-val">45–65 LPA</div>
+      </div>
+      <div class="comp-item">
+        <div class="comp-label">Current (baseline)</div>
+        <div class="comp-track"><div class="comp-fill" style="width:27%;background:#888780"></div></div>
+        <div class="comp-val">37 LPA</div>
+      </div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="risk-box">Google SDE-3 is achievable but requires 9–12 months of prep. Don't aim for it in 4–6 months unless your DSA is already sharp. A rushed Google interview that fails sets you back emotionally and wastes a slot.</div>
+      <div class="tip-box">50–70 LPA in 6 months is realistic if you execute phases 1–3 cleanly. 60–80 LPA is possible with 2 competing offers and strong negotiation. That's the actual ceiling for this timeline.</div>
+    </div>
+  </div>
+
+  <!-- SKILL MAP -->
+  <div class="phase-panel" id="panel-5">
+    <div style="margin-bottom:16px">
+      <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Skills to invest in — prioritized by ROI for your profile</div>
+      <div style="font-size:12px;color:var(--color-text-secondary)">Color = urgency. Orange = do now. Purple = build alongside. Teal = 6–12 month horizon.</div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-label">Do now (interview-critical)</div>
+      <div class="skills-grid">
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>DSA (trees, graphs, DP)</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>HLD / distributed systems</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>LLD + design patterns</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>Java concurrency + JVM</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>SQL query optimization</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#EF9F27"></div>Kafka + async patterns</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-label">Build alongside (differentiator)</div>
+      <div class="skills-grid">
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>LLM API integration</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>RAG pipelines (LangChain4j)</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>Vector DBs (Weaviate, pgvector)</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>Prompt engineering basics</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>Observability (OTel, Grafana)</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#7F77DD"></div>Docker + basic K8s</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">6–12 month horizon (future-proofing)</div>
+      <div class="skills-grid">
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>Agentic system design</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>MCP / tool-use patterns</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>AI cost optimization</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>Technical writing / blogging</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>OSS contribution (Spring AI?)</div>
+        <div class="skill-pill"><div class="priority-dot" style="background:#1D9E75"></div>SRE / chaos engineering basics</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="tip-box">FDE roles (Forward Deployed Engineer at Palantir, Scale AI, etc.) require strong customer-facing consultative skills and usually pay well — but they're rare, competition is fierce, and many are US-based. Your solutioning experience helps, but pursue this as a secondary track, not primary.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function setTab(idx) {
+  document.querySelectorAll('.phase-panel').forEach((p,i) => {
+    p.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.ptab').forEach((t,i) => {
+    t.classList.toggle('active', i === idx);
+  });
+}
+</script>
