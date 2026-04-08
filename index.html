@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Roadmap</title>
+<title>Roadmap Viewer</title>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <style>
-body { margin:0; }
-iframe {
-    width:100%;
-    height:100vh;
-    border:none;
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: Arial;
+    padding: 20px;
 }
 </style>
 </head>
+
 <body>
 
-<a href="roadmap.md" target="_blank">📄 Full Roadmap (Markdown)</a>
-<a href="roadmap.pdf" target="_blank">📄 Full Roadmap PDF</a>
+<h1>🚀 Roadmap</h1>
+
+<div id="content">Loading...</div>
+
+<script>
+fetch('roadmap.md')
+  .then(res => res.text())
+  .then(md => {
+      document.getElementById('content').innerHTML = marked.parse(md);
+  });
+</script>
 
 </body>
 </html>
