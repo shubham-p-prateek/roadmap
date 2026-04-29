@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Project 2 — Career Roadmap</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--blue-d:rgba(55,138,221,0.12);--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--coral-l:#F0997B;--purple:#7F77DD;--purple-l:#AFA9EC;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px;gap:0}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}
+.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}
+.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+.w{padding:1rem 0;font-family:'DM Sans',sans-serif}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.5rem}
+.stat{background:var(--bg3);border-radius:var(--r);padding:10px 12px}
+.slabel{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.sval{font-size:20px;font-weight:500;color:var(--text)}
+.ssub{font-size:11px;color:var(--text2);margin-top:2px}
+.sec{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.proj-switcher{display:flex;gap:4px;margin-bottom:1rem}
+.psw{font-size:12px;padding:5px 14px;border-radius:var(--r);border:0.5px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg2);transition:all .15s}
+.psw:hover{background:var(--bg3)}
+.psw.on{font-weight:500;color:var(--text);border-color:rgba(255,255,255,0.2)}
+.proj-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px;border:0.5px solid var(--border);border-radius:var(--rl);background:var(--bg2);margin-bottom:10px}
+.ph-left{flex:1}
+.ph-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:4px}
+.ph-stack{font-size:12px;color:var(--text2);margin-bottom:8px}
+.ph-pills{display:flex;flex-wrap:wrap;gap:4px}
+.pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
+.ph-right{text-align:right;flex-shrink:0}
+.ph-pct{font-size:22px;font-weight:500;color:var(--text)}
+.ph-sub{font-size:11px;color:var(--text3)}
+.prog-bar-bg{height:4px;background:var(--border);border-radius:2px;margin-top:8px;width:80px;margin-left:auto}
+.prog-bar{height:4px;border-radius:2px;transition:width .4s}
+.phase-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.phase-row{border:0.5px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.phase-row.done-phase{border-color:rgba(29,158,117,0.35)}
+.prh{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;background:var(--bg2)}
+.prh:hover{background:var(--bg3)}
+.pr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pr-name{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.pr-weeks{font-size:11px;color:var(--text2)}
+.pr-count{font-size:11px;color:var(--text3);min-width:32px;text-align:right}
+.pr-chev{font-size:10px;color:var(--text3);transition:transform .2s;margin-left:4px}
+.phase-row.open .pr-chev{transform:rotate(180deg)}
+.pr-body{display:none;border-top:0.5px solid var(--border)}
+.phase-row.open .pr-body{display:block}
+.inner-tabs{display:flex;border-bottom:0.5px solid var(--border)}
+.itab{font-size:11px;padding:6px 12px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.itab.on{color:var(--blue-l);border-bottom-color:var(--blue-l)}
+.itab:hover{background:var(--bg3)}
+.ipanel{display:none;padding:10px 12px}
+.ipanel.on{display:block}
+.task-list{display:flex;flex-direction:column;gap:5px}
+.task{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .15s}
+.task:hover{border-color:var(--border2)}
+.task.done{background:rgba(29,158,117,0.15);border-color:rgba(29,158,117,0.35)}
+.task-check{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;margin-top:1px}
+.task.done .task-check{background:var(--teal-l);border-color:var(--teal-l);color:#fff}
+.task-text{font-size:12px;color:var(--text2);flex:1;line-height:1.4}
+.task-text strong{font-weight:500;color:var(--text)}
+.tag{font-size:10px;padding:1px 6px;border-radius:8px;flex-shrink:0;margin-top:2px;font-weight:500}
+.q-list{display:flex;flex-direction:column;gap:5px}
+.qrow{padding:6px 8px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);font-size:12px;color:var(--text2);line-height:1.4}
+.qrow strong{font-weight:500;color:var(--text)}
+.note-box{font-size:12px;color:var(--text2);padding:8px 10px;background:var(--bg3);border-radius:var(--r);border-left:2px solid var(--border2);border-top-left-radius:0;border-bottom-left-radius:0;line-height:1.6}
+.note-box strong{color:var(--text);font-weight:500}
+
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+<div class="page-header">
+  <h1>Project 2 — Document Q&amp;A</h1>
+  <p>Python · FastAPI · Qdrant · OpenAI · Redis · Kafka · Prometheus · CI/CD · Oct 2026 – Jan 2027</p>
+</div>
+<div class="w">
+<h2 class="sr-only">Project build tracker for distributed notification service and document intelligence backend, with tasks, interview questions and progress tracking</h2>
+
+<div class="stats">
+  <div class="stat"><div class="slabel">Project 1 tasks</div><div class="sval" id="p1-pct">0%</div><div class="ssub" id="p1-sub">0 of 28 done</div></div>
+  <div class="stat"><div class="slabel">Project 2 tasks</div><div class="sval" id="p2-pct">0%</div><div class="ssub" id="p2-sub">0 of 32 done</div></div>
+  <div class="stat"><div class="slabel">P1 timeline</div><div class="sval">10 wk</div><div class="ssub">Aug – Oct 2026</div></div>
+  <div class="stat"><div class="slabel">P2 timeline</div><div class="sval">12 wk</div><div class="ssub">Oct – Jan 2027</div></div>
+</div>
+
+<div class="proj-switcher">
+  <div class="psw on" onclick="switchProj(1,this)" style="display:none">Project 1 — Notification service</div>
+  <div class="psw" onclick="switchProj(2,this)" style="display:none">Project 2 — Document Q&A</div>
+</div>
+
+<div id="proj1-view" style="display:none">
+  <div class="proj-header">
+    <div class="ph-left">
+      <div class="ph-name">Distributed notification service</div>
+      <div class="ph-stack">Java · Spring Boot · Kafka · Redis · PostgreSQL · Prometheus · Grafana · Docker · GitHub Actions</div>
+      <div class="ph-pills">
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">Async pipeline</span>
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">Retry + DLQ</span>
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">Redis dedup</span>
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">Rate limiting</span>
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">Observability</span>
+        <span class="pill" style="background:#E1F5EE;color:#0F6E56">CI/CD</span>
+      </div>
+    </div>
+    <div class="ph-right">
+      <div class="ph-pct" id="p1-hpct">0%</div>
+      <div class="ph-sub">complete</div>
+      <div class="prog-bar-bg"><div class="prog-bar" id="p1-hbar" style="background:#1D9E75;width:0%"></div></div>
+    </div>
+  </div>
+  <div class="phase-list" id="p1-phases"></div>
+</div>
+
+<div id="proj2-view">
+  <div class="proj-header">
+    <div class="ph-left">
+      <div class="ph-name">Intelligent document Q&A backend</div>
+      <div class="ph-stack">Python · FastAPI · Qdrant · OpenAI · Redis · PostgreSQL · Kafka · Prometheus · Docker · GitHub Actions</div>
+      <div class="ph-pills">
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">RAG pipeline</span>
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">Hybrid search</span>
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">Reranking</span>
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">Semantic cache</span>
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">Eval framework</span>
+        <span class="pill" style="background:#E6F1FB;color:#185FA5">Two services</span>
+      </div>
+    </div>
+    <div class="ph-right">
+      <div class="ph-pct" id="p2-hpct">0%</div>
+      <div class="ph-sub">complete</div>
+      <div class="prog-bar-bg"><div class="prog-bar" id="p2-hbar" style="background:#378ADD;width:0%"></div></div>
+    </div>
+  </div>
+  <div class="phase-list" id="p2-phases"></div>
+</div>
+
+</div>
+</div>
+<script>
+
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}},toggle(ns,id){const d=this.get(ns);d[id]=!d[id];this.set(ns,d);return d[id]},isDone(ns,id){return!!this.get(ns)[id]}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');if(!nav)return;PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});updateBadge()}
+function getProgress(){const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});return{done:d,total:t,pct:Math.round(d/t*100)}}
+function updateBadge(){const b=document.getElementById('nav-badge');if(b){const p=getProgress();b.textContent=p.pct+'%'}}
+
+initNav('project2.html');
+const p1Phases = [
+  {
+    id:'p1a', name:'Phase A — skeleton + DB', weeks:'Weeks 1–2', color:'#1D9E75',
+    tasks:[
+      {t:'Spring Boot project setup — multi-module (api, core, infra)',tag:'setup'},
+      {t:'PostgreSQL schema: events, delivery_log, user_preferences tables',tag:'db'},
+      {t:'Document upload/storage API — REST endpoint accepting event payload',tag:'api'},
+      {t:'JPA entities + repositories for all three tables',tag:'db'},
+      {t:'Global exception handler + structured error responses',tag:'api'},
+      {t:'Docker Compose: app + postgres + redis (local dev)',tag:'infra'},
+    ],
+    interview:['Walk me through your module structure and why you split it this way','How did you design the events table schema — what indexes and why?','How does your exception handler work — what does the error contract look like?'],
+    note:'Do not add Kafka yet. Get the API and DB layer solid first. Premature integration = hard-to-debug issues.'
+  },
+  {
+    id:'p1b', name:'Phase B — Kafka pipeline', weeks:'Weeks 3–4', color:'#1D9E75',
+    tasks:[
+      {t:'Kafka setup in Docker Compose — broker + zookeeper',tag:'infra'},
+      {t:'KafkaProducer: publish event to topic on API call',tag:'kafka'},
+      {t:'KafkaConsumer: consume and route to channel handler',tag:'kafka'},
+      {t:'Channel handler interface + 3 implementations: email, SMS, push',tag:'core'},
+      {t:'Async processing confirmed — API returns 202 Accepted immediately',tag:'api'},
+      {t:'Job status endpoint: PENDING → PROCESSING → DELIVERED → FAILED',tag:'api'},
+    ],
+    interview:['Why Kafka instead of a direct HTTP call to the channel handler?','How do you guarantee the consumer picks up the message exactly once?','What happens if the consumer crashes mid-processing — how does the system recover?','Walk me through your channel handler interface design — why this abstraction?'],
+    note:'The 202 Accepted pattern is key. Synchronous delivery would timeout for slow providers. Explain this decision clearly in interviews.'
+  },
+  {
+    id:'p1c', name:'Phase C — reliability', weeks:'Weeks 5–6', color:'#1D9E75',
+    tasks:[
+      {t:'Redis deduplication: hash event ID before processing, skip if seen',tag:'redis'},
+      {t:'Retry logic: exponential backoff with jitter (3 attempts)',tag:'core'},
+      {t:'Dead letter queue: failed events routed to DLQ topic after max retries',tag:'kafka'},
+      {t:'Per-user rate limiting: Redis sliding window counter per user per channel',tag:'redis'},
+      {t:'User notification preferences: respect opt-out per channel per event type',tag:'core'},
+      {t:'Priority queues: separate Kafka topics for OTP vs marketing',tag:'kafka'},
+    ],
+    interview:['How does your dedup logic work — what is the key and what is the TTL?','Walk me through what happens when the email provider returns 500 three times in a row','How does your rate limiter work — what algorithm and why?','How do you handle the thundering herd when DLQ is replayed?'],
+    note:'Reliability components are the interview gold. This phase alone can fill 30 minutes of system design discussion.'
+  },
+  {
+    id:'p1d', name:'Phase D — observability + CI/CD', weeks:'Weeks 7–8', color:'#1D9E75',
+    tasks:[
+      {t:'Micrometer + Prometheus: per-channel delivery rate, latency, error rate',tag:'obs'},
+      {t:'Custom metric: Kafka consumer lag per topic',tag:'obs'},
+      {t:'Grafana dashboard: 4 panels (delivery rate, latency p99, error rate, queue depth)',tag:'obs'},
+      {t:'Structured logging with correlation ID flowing from API → Kafka → consumer',tag:'obs'},
+      {t:'GitHub Actions: build → test → Docker build → push to registry',tag:'cicd'},
+      {t:'Deploy to Railway or Render — live URL working reliably',tag:'cicd'},
+    ],
+    interview:['What metrics did you instrument and why those specifically?','How does your correlation ID flow across the async Kafka boundary?','Walk me through your CI/CD pipeline — what does each step do?','How would you alert on this system — what thresholds and why?'],
+    note:'Observability last is intentional. Build the system first, instrument what you actually need to debug. Not the other way around.'
+  },
+  {
+    id:'p1e', name:'Phase E — polish + war stories', weeks:'Weeks 9–10', color:'#1D9E75',
+    tasks:[
+      {t:'Write architecture doc: decision log for every major choice',tag:'docs'},
+      {t:'README: architecture diagram, local setup, live URL',tag:'docs'},
+      {t:'Load test: 1000 events/min, measure consumer lag and delivery latency',tag:'test'},
+      {t:'Fix any issues found in load test — document what broke and how you fixed it',tag:'test'},
+      {t:'Prepare 5 war stories from this project: failure modes, tradeoffs, fixes',tag:'prep'},
+      {t:'Practice explaining the entire system in 5 min, 15 min, and 45 min versions',tag:'prep'},
+    ],
+    interview:['What broke during your load test and how did you fix it?','If you were to scale this to 10M events/day what would you change?','What would you build differently if you started over?','How would you add a new channel type — what changes in your code?'],
+    note:'The war stories from this phase are more valuable than the code itself. Document every failure and fix while it is fresh.'
+  }
+];
+
+const p2Phases = [
+  {
+    id:'p2a', name:'Phase A — Java service skeleton', weeks:'Weeks 1–2', color:'#378ADD',
+    tasks:[
+      {t:'Spring Boot project: auth (JWT), document CRUD API, S3/MinIO integration',tag:'java'},
+      {t:'PostgreSQL schema: documents, chunks, jobs, query_logs tables',tag:'db'},
+      {t:'Document upload flow: store file → create job record → publish to Kafka',tag:'java'},
+      {t:'Job status API: polling endpoint for processing state',tag:'java'},
+      {t:'Redis rate limiting on query endpoint per user',tag:'redis'},
+      {t:'Docker Compose: java-service + postgres + redis + kafka + qdrant',tag:'infra'},
+    ],
+    interview:['Why Java for the API layer and Python for the AI service — what drove that split?','How does your document upload flow work end to end — from API call to job queued?','How do you handle auth across the two services?'],
+    note:'Get the Java service solid before touching Python. The two services talk over HTTP and Kafka — clean contracts matter.'
+  },
+  {
+    id:'p2b', name:'Phase B — Python parsing pipeline', weeks:'Weeks 3–4', color:'#378ADD',
+    tasks:[
+      {t:'FastAPI project setup: async, Pydantic models, structured error handling',tag:'python'},
+      {t:'Kafka consumer: listens for document.process topic from Java service',tag:'kafka'},
+      {t:'PDF parser: PyMuPDF — extract text, preserve headings and page numbers',tag:'ai'},
+      {t:'Chunking strategy 1: fixed size (512 tokens) with 50-token overlap',tag:'ai'},
+      {t:'Chunking strategy 2: semantic — split on heading/section boundaries',tag:'ai'},
+      {t:'Store chunks in PostgreSQL with metadata: doc_id, page, section, token_count',tag:'db'},
+    ],
+    interview:['What chunking strategy did you use and why — what did you test?','How do you handle multi-column PDFs or scanned documents?','What is the tradeoff between chunk size and retrieval quality?','How does your Kafka consumer notify the Java service on completion?'],
+    note:'Chunking strategy is a real interview topic. Test both strategies on a real doc and measure which retrieves better. Have numbers ready.'
+  },
+  {
+    id:'p2c', name:'Phase C — embeddings + vector store', weeks:'Weeks 5–6', color:'#378ADD',
+    tasks:[
+      {t:'OpenAI text-embedding-3-small: batch embed all chunks',tag:'ai'},
+      {t:'Qdrant collection setup: vectors + payload (doc_id, user_id, page, section)',tag:'ai'},
+      {t:'Store embeddings with metadata payload in Qdrant',tag:'ai'},
+      {t:'Query embedding: embed user query at request time',tag:'ai'},
+      {t:'Semantic search: Qdrant cosine similarity, top-20 candidates',tag:'ai'},
+      {t:'End-to-end working: upload PDF → index → query returns relevant chunks',tag:'ai'},
+    ],
+    interview:['Why text-embedding-3-small over ada-002 or a local model?','How do you handle embedding cost at scale — what is your batching strategy?','What metadata do you store in Qdrant and why those fields specifically?','How do you filter search results to only the current user\'s documents?'],
+    note:'Get the happy path working before optimising. One PDF, one query, relevant result. Then improve quality.'
+  },
+  {
+    id:'p2d', name:'Phase D — hybrid search + reranking + generation', weeks:'Weeks 7–8', color:'#378ADD',
+    tasks:[
+      {t:'BM25 keyword search on chunk text (rank_bm25 library)',tag:'ai'},
+      {t:'Hybrid merge: combine semantic + BM25 results, deduplicate',tag:'ai'},
+      {t:'Reranker: cross-encoder (sentence-transformers) on top-20, return top-5',tag:'ai'},
+      {t:'LLM generation: GPT-4o-mini with retrieved chunks as context',tag:'ai'},
+      {t:'Streaming response from Python service back to Java service',tag:'api'},
+      {t:'Source citations in response: which chunk, which document, which page',tag:'api'},
+    ],
+    interview:['Why hybrid search instead of pure vector search — what does BM25 catch that vectors miss?','Why reranking — what is the quality difference vs just taking top-5 from vector search?','How do you construct your prompt — what does the context window look like?','How do you handle queries where no relevant context exists?'],
+    note:'Hybrid search + reranking is the quality differentiator. Most tutorial RAG systems skip both. This is what makes yours defensible.'
+  },
+  {
+    id:'p2e', name:'Phase E — caching + observability + CI/CD', weeks:'Weeks 9–10', color:'#378ADD',
+    tasks:[
+      {t:'Semantic cache: hash query embedding → Redis key, TTL 1 hour',tag:'redis'},
+      {t:'Prometheus metrics: latency per pipeline stage (embed, retrieve, rerank, generate)',tag:'obs'},
+      {t:'Token usage tracking per request: store in query_logs',tag:'obs'},
+      {t:'Cost tracking: estimated USD per query based on tokens used',tag:'obs'},
+      {t:'Grafana dashboard: retrieval latency, cache hit rate, token spend, error rate',tag:'obs'},
+      {t:'GitHub Actions: Python + Java services built and deployed independently',tag:'cicd'},
+    ],
+    interview:['How does your semantic cache work — what is the similarity threshold for a cache hit?','What did you learn from your latency metrics — where is the bottleneck?','How much did semantic caching reduce your LLM costs in testing?','How do you deploy two services independently without breaking the integration?'],
+    note:'Measure your cache hit rate and latency reduction. Real numbers in interviews are 10x more impressive than theoretical claims.'
+  },
+  {
+    id:'p2f', name:'Phase F — eval framework + polish', weeks:'Weeks 11–12', color:'#378ADD',
+    tasks:[
+      {t:'Ground truth dataset: 20 Q&A pairs from your own documents',tag:'eval'},
+      {t:'Retrieval recall metric: does correct chunk appear in top-5?',tag:'eval'},
+      {t:'Answer correctness: LLM-as-judge scoring against ground truth',tag:'eval'},
+      {t:'Eval runner: script that runs all 20 pairs and outputs report',tag:'eval'},
+      {t:'Architecture doc: every major decision with reasoning',tag:'docs'},
+      {t:'README: system diagram, local setup, live URL, eval results',tag:'docs'},
+      {t:'Prepare 6 war stories: failures, tradeoffs, optimisations, eval findings',tag:'prep'},
+    ],
+    interview:['Walk me through your eval framework — how do you measure retrieval quality?','What did your eval reveal — what was worse than you expected and how did you fix it?','How would you detect retrieval quality regression in production?','If you had to improve answer quality by 20% what would you change first?'],
+    note:'The eval framework separates you from 90% of AI engineer candidates. Every strong company will ask how you measure system quality. Have real numbers.'
+  }
+];
+
+let taskDone = {};
+let tabState = {};
+let currentProj = 1;
+
+function switchProj(n, el){
+  currentProj = n;
+  document.querySelectorAll('.psw').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('proj1-view').style.display = n===1?'block':'none';
+  document.getElementById('proj2-view').style.display = n===2?'block':'none';
+}
+
+function renderPhases(phases, projId){
+  const cont = document.getElementById(projId+'-phases');
+  cont.innerHTML = '';
+  phases.forEach(ph => {
+    const doneCount = ph.tasks.filter((_,i) => taskDone[ph.id+'-'+i]).length;
+    const pct = Math.round(doneCount/ph.tasks.length*100);
+    const allDone = doneCount === ph.tasks.length;
+    const curTab = tabState[ph.id] || 'tasks';
+    const row = document.createElement('div');
+    row.className = 'phase-row' + (allDone?' done-phase':'');
+    row.id = 'pr-'+ph.id;
+    row.innerHTML = `
+      <div class="prh" onclick="togglePhase('${ph.id}')">
+        <div class="pr-dot" style="background:${ph.color}"></div>
+        <span class="pr-name">${ph.name}</span>
+        <span class="pr-weeks" style="font-size:11px;color:var(--color-text-tertiary)">${ph.weeks}</span>
+        <div style="height:3px;background:var(--color-border-tertiary);width:50px;border-radius:2px;margin-left:8px"><div style="height:3px;border-radius:2px;background:${ph.color};width:${pct}%;transition:width .3s" id="phbar-${ph.id}"></div></div>
+        <span class="pr-count" id="phcount-${ph.id}">${doneCount}/${ph.tasks.length}</span>
+        <span class="pr-chev">&#9660;</span>
+      </div>
+      <div class="pr-body">
+        <div class="inner-tabs">
+          <div class="itab ${curTab==='tasks'?'on':''}" onclick="switchTab('${ph.id}','tasks',event)">Build tasks</div>
+          <div class="itab ${curTab==='interview'?'on':''}" onclick="switchTab('${ph.id}','interview',event)">Interview Q</div>
+          <div class="itab ${curTab==='note'?'on':''}" onclick="switchTab('${ph.id}','note',event)">Note</div>
+        </div>
+        <div class="ipanel ${curTab==='tasks'?'on':''}" id="${ph.id}-tasks">
+          <div class="task-list">${ph.tasks.map((t,i) => {
+            const tagColors = {setup:'#EEEDFE|#534AB7',db:'#E6F1FB|#185FA5',api:'#FAEEDA|#854F0B',infra:'#F1EFE8|#5F5E5A',kafka:'#FAECE7|#993C1D',core:'#EAF3DE|#3B6D11',redis:'#FCEBEB|#A32D2D',obs:'#E1F5EE|#0F6E56',cicd:'#FBEAF0|#993556',docs:'#F1EFE8|#5F5E5A',test:'#FAEEDA|#854F0B',prep:'#EEEDFE|#534AB7',java:'#E6F1FB|#185FA5',python:'#FAEEDA|#854F0B',ai:'#E1F5EE|#0F6E56',eval:'#EEEDFE|#534AB7'};
+            const [bg,fg] = (tagColors[t.tag]||'#F1EFE8|#5F5E5A').split('|');
+            const done = taskDone[ph.id+'-'+i];
+            return `<div class="task ${done?'done':''}" id="task-${ph.id}-${i}" onclick="toggleTask('${ph.id}',${i})"><div class="task-check">${done?'&#10003;':''}</div><div class="task-text">${t.t}</div><span class="tag" style="background:${bg};color:${fg}">${t.tag}</span></div>`;
+          }).join('')}</div>
+        </div>
+        <div class="ipanel ${curTab==='interview'?'on':''}" id="${ph.id}-interview">
+          <div class="q-list">${ph.interview.map(q => `<div class="qrow">${q}</div>`).join('')}</div>
+        </div>
+        <div class="ipanel ${curTab==='note'?'on':''}" id="${ph.id}-note">
+          <div class="note-box">${ph.note}</div>
+        </div>
+      </div>`;
+    cont.appendChild(row);
+  });
+}
+
+function togglePhase(id){
+  const row = document.getElementById('pr-'+id);
+  if(row) row.classList.toggle('open');
+}
+
+function switchTab(phId, tab, e){
+  e.stopPropagation();
+  tabState[phId] = tab;
+  const row = document.getElementById('pr-'+phId);
+  if(!row) return;
+  row.querySelectorAll('.itab').forEach(t => t.classList.remove('on'));
+  row.querySelectorAll('.ipanel').forEach(p => p.classList.remove('on'));
+  e.target.classList.add('on');
+  const panel = row.querySelector('#'+phId+'-'+tab);
+  if(panel) panel.classList.add('on');
+}
+
+function toggleTask(phId, idx){
+  const key = phId+'-'+idx;
+  taskDone[key] = !taskDone[key];
+  const el = document.getElementById('task-'+phId+'-'+idx);
+  if(el){
+    el.classList.toggle('done', taskDone[key]);
+    el.querySelector('.task-check').innerHTML = taskDone[key]?'&#10003;':'';
+  }
+  const phases = phId.startsWith('p1') ? p1Phases : p2Phases;
+  const ph = phases.find(p => p.id === phId);
+  if(ph){
+    const doneCount = ph.tasks.filter((_,i) => taskDone[phId+'-'+i]).length;
+    const pct = Math.round(doneCount/ph.tasks.length*100);
+    const allDone = doneCount === ph.tasks.length;
+    const bar = document.getElementById('phbar-'+phId);
+    const cnt = document.getElementById('phcount-'+phId);
+    const row = document.getElementById('pr-'+phId);
+    if(bar) bar.style.width = pct+'%';
+    if(cnt) cnt.textContent = doneCount+'/'+ph.tasks.length;
+    if(row) row.classList.toggle('done-phase', allDone);
+  }
+  updateStats();
+}
+
+function updateStats(){
+  const p1Total = p1Phases.reduce((a,p) => a+p.tasks.length, 0);
+  const p2Total = p2Phases.reduce((a,p) => a+p.tasks.length, 0);
+  const p1Done = p1Phases.reduce((a,p) => a + p.tasks.filter((_,i) => taskDone[p.id+'-'+i]).length, 0);
+  const p2Done = p2Phases.reduce((a,p) => a + p.tasks.filter((_,i) => taskDone[p.id+'-'+i]).length, 0);
+  const p1pct = Math.round(p1Done/p1Total*100);
+  const p2pct = Math.round(p2Done/p2Total*100);
+  document.getElementById('p1-pct').textContent = p1pct+'%';
+  document.getElementById('p2-pct').textContent = p2pct+'%';
+  document.getElementById('p1-sub').textContent = p1Done+' of '+p1Total+' done';
+  document.getElementById('p2-sub').textContent = p2Done+' of '+p2Total+' done';
+  document.getElementById('p1-hpct').textContent = p1pct+'%';
+  document.getElementById('p2-hpct').textContent = p2pct+'%';
+  document.getElementById('p1-hbar').style.width = p1pct+'%';
+  document.getElementById('p2-hbar').style.width = p2pct+'%';
+}
+
+renderPhases(p1Phases, 'p1');
+renderPhases(p2Phases, 'p2');
+// localStorage persistence
+const _savedP1=Store.get('p1');
+const _savedP2=Store.get('p2');
+Object.keys(_savedP1).forEach(k=>{taskDone[k]=_savedP1[k]});
+Object.keys(_savedP2).forEach(k=>{taskDone[k]=_savedP2[k]});
+
+const _origToggleTask=toggleTask;
+window.toggleTask=function(phId,idx){
+  _origToggleTask(phId,idx);
+  if(phId.startsWith('p1')){const s={};p1Phases.forEach(p=>p.tasks.forEach((_,i)=>{const k=p.id+'-'+i;s[k]=!!taskDone[k]}));Store.set('p1',s)}
+  else{const s={};p2Phases.forEach(p=>p.tasks.forEach((_,i)=>{const k=p.id+'-'+i;s[k]=!!taskDone[k]}));Store.set('p2',s)}
+  updateBadge();
+};
+
+renderPhases(p1Phases,'p1');
+renderPhases(p2Phases,'p2');
+
+</script>
+</body>
+</html>

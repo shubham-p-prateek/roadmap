@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Roadmap — Career Roadmap</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--blue-d:rgba(55,138,221,0.12);--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--coral-l:#F0997B;--purple:#7F77DD;--purple-l:#AFA9EC;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px;gap:0}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}
+.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}
+.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans',sans-serif; }
+  .roadmap { padding: 1rem 0; }
+
+  .header-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem; flex-wrap: wrap; gap: 8px;
+  }
+  .header-bar h2 { font-size: 16px; font-weight: 500; color: var(--text); }
+  .target-badge {
+    font-size: 12px; padding: 4px 12px; border-radius: var(--r);
+    background: rgba(29,158,117,0.15); color: var(--teal-l);
+    font-weight: 500;
+  }
+
+  /* Timeline bar */
+  .timeline-bar {
+    display: grid; grid-template-columns: repeat(10, 1fr);
+    gap: 3px; margin-bottom: 1.5rem;
+  }
+  .tmonth {
+    text-align: center; font-size: 11px; color: var(--text2);
+    padding: 4px 2px 3px; border-radius: 4px;
+    cursor: pointer; transition: background .15s;
+  }
+  .tmonth:hover { background: var(--bg3); }
+  .tmonth.active { background: var(--blue-d); color: var(--blue-l); font-weight: 500; }
+  .tmonth-label { font-size: 10px; margin-top: 2px; opacity: .7; }
+
+  /* Phase cards */
+  .phases { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .phase-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--rl);
+    overflow: hidden; cursor: pointer;
+    transition: border-color .15s;
+  }
+  .phase-card:hover { border-color: var(--border2); }
+  .phase-card.open { border-color: rgba(255,255,255,0.2); }
+
+  .phase-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; background: var(--bg3);
+  }
+  .phase-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .phase-title { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .phase-months { font-size: 12px; color: var(--text2); }
+  .phase-chevron { font-size: 11px; color: var(--text3); transition: transform .2s; }
+  .phase-card.open .phase-chevron { transform: rotate(180deg); }
+
+  .phase-body { display: none; padding: 12px 14px; }
+  .phase-card.open .phase-body { display: block; }
+
+  .skill-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px; margin-bottom: 10px;
+  }
+  .skill-pill {
+    font-size: 12px; padding: 5px 10px; border-radius: var(--r);
+    border: 0.5px solid var(--border);
+    color: var(--text2);
+    background: var(--bg2);
+  }
+  .skill-pill strong { font-weight: 500; color: var(--text); display: block; font-size: 12px; }
+
+  .focus-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+  .checkpoint {
+    font-size: 12px; color: var(--text2); margin-top: 8px;
+    padding: 8px 10px; border-left: 2px solid var(--border2);
+    background: var(--bg3); border-radius: 0 4px 4px 0;
+  }
+  .checkpoint strong { color: var(--text); font-weight: 500; }
+
+  /* Daily schedule */
+  .section-title { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+
+  .schedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .sched-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--rl);
+    padding: 10px 12px;
+    background: var(--bg2);
+  }
+  .sched-day { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .sched-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 0.5px solid var(--border); }
+  .sched-row:last-child { border-bottom: none; }
+  .sched-task { font-size: 12px; color: var(--text2); }
+  .sched-time { font-size: 11px; color: var(--text3); font-weight: 500; }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+  .proj-card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--rl);
+    padding: 10px 12px;
+    background: var(--bg2);
+  }
+  .proj-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .proj-stack { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
+  .proj-tag {
+    display: inline-block; font-size: 10px; padding: 2px 7px;
+    border-radius: 10px; margin: 2px 2px 0 0; font-weight: 500;
+  }
+
+  /* Risks */
+  .risks { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem; }
+  .risk-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 12px; color: var(--text2);
+    padding: 7px 10px; border-radius: var(--r);
+    background: var(--bg3);
+    border: 0.5px solid var(--border);
+  }
+  .risk-icon { font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .risk-text strong { color: var(--text); font-weight: 500; }
+
+  /* Switch target */
+  .switch-target {
+    border: 2px solid rgba(55,138,221,0.4);
+    border-radius: var(--rl);
+    padding: 12px 14px;
+    background: var(--blue-d);
+  }
+  .switch-target .st-label { font-size: 11px; color: var(--blue-l); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+  .switch-target .st-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .switch-target .st-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .switch-target .st-item { font-size: 12px; color: var(--text2); }
+  .switch-target .st-item strong { color: var(--text); font-weight: 500; }
+
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+<div class="page-header">
+  <h1>Phase roadmap</h1>
+  <p>9-month plan · May 2026 – Feb 2027 · Click timeline months or phase cards to expand</p>
+</div>
+<div class="roadmap">
+  <div class="header-bar">
+    <h2>Senior Backend + AI Engineer Roadmap</h2>
+    <span class="target-badge">Target: 50 LPA · Jan 2027</span>
+  </div>
+
+  <!-- Timeline bar -->
+  <div class="section-title">Timeline</div>
+  <div class="timeline-bar" id="timeline">
+    <div class="tmonth active" data-phase="0" onclick="selectMonth(0)">May<div class="tmonth-label">Setup</div></div>
+    <div class="tmonth" data-phase="1" onclick="selectMonth(1)">Jun<div class="tmonth-label">Ph 1</div></div>
+    <div class="tmonth" data-phase="1" onclick="selectMonth(1)">Jul<div class="tmonth-label">Ph 1</div></div>
+    <div class="tmonth" data-phase="2" onclick="selectMonth(2)">Aug<div class="tmonth-label">Ph 2</div></div>
+    <div class="tmonth" data-phase="2" onclick="selectMonth(2)">Sep<div class="tmonth-label">Ph 2</div></div>
+    <div class="tmonth" data-phase="3" onclick="selectMonth(3)">Oct<div class="tmonth-label">Ph 3</div></div>
+    <div class="tmonth" data-phase="3" onclick="selectMonth(3)">Nov<div class="tmonth-label">Ph 3</div></div>
+    <div class="tmonth" data-phase="4" onclick="selectMonth(4)">Dec<div class="tmonth-label">Ph 4</div></div>
+    <div class="tmonth" data-phase="4" onclick="selectMonth(4)">Jan<div class="tmonth-label">Ph 4</div></div>
+    <div class="tmonth" data-phase="5" onclick="selectMonth(5)">Feb+<div class="tmonth-label">Apply</div></div>
+  </div>
+
+  <!-- Phases -->
+  <div class="section-title">Phases</div>
+  <div class="phases">
+
+    <!-- Phase 0 -->
+    <div class="phase-card open" id="phase-0" onclick="togglePhase(0)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#888780"></div>
+        <span class="phase-title">Phase 0 — Reset &amp; Habit</span>
+        <span class="phase-months">Weeks 1–2 · May</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>DSA warm-up</strong>Easy problems daily</div>
+          <div class="skill-pill"><strong>Java audit</strong>Identify rusty areas</div>
+          <div class="skill-pill"><strong>Env setup</strong>LeetCode, Notion log</div>
+          <div class="skill-pill"><strong>Mentorship</strong>Decision this week</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Checkpoint:</strong> 12–14 problems solved. Java gap list written. Mentorship decided.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-card" id="phase-1" onclick="togglePhase(1)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#1D9E75"></div>
+        <span class="phase-title">Phase 1 — Foundation</span>
+        <span class="phase-months">Months 1–2 · Jun–Jul</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>DSA</strong>Arrays, Hashing, Two Pointers, Stack, Binary Search (~55 problems)</div>
+          <div class="skill-pill"><strong>Java + Spring Boot</strong>Collections, concurrency, DI, bean lifecycle, REST</div>
+          <div class="skill-pill"><strong>LLD</strong>Cohort + 4 systems coded</div>
+          <div class="skill-pill"><strong>DB + OS sprint</strong>1 week: indexes, ACID, isolation, process/thread</div>
+          <div class="skill-pill"><strong>HLD — passive</strong>Read DDIA once, no active study yet</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Checkpoint:</strong> 90–100 problems done. Mediums solved 60%+ independently. 4 LLD systems coded. Java collections + Spring Boot comfortable.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-card" id="phase-2" onclick="togglePhase(2)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#378ADD"></div>
+        <span class="phase-title">Phase 2 — HLD Depth + Project 1</span>
+        <span class="phase-months">Months 3–4 · Aug–Sep</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>DSA</strong>Trees, Graphs, DP fundamentals (~50 problems)</div>
+          <div class="skill-pill"><strong>HLD active</strong>8 systems — design independently then verify</div>
+          <div class="skill-pill"><strong>LLD independent</strong>6–8 systems without prompts, coded in Java</div>
+          <div class="skill-pill"><strong>Project 1 begins</strong>Distributed Notification Service (Java, Kafka, Redis)</div>
+          <div class="skill-pill"><strong>CI/CD intro</strong>GitHub Actions + Docker in project</div>
+          <div class="skill-pill"><strong>Observability intro</strong>Prometheus + Grafana in project</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Checkpoint:</strong> 140 problems done. 6–8 HLD systems designable independently. Project 1 is 50–60% built (Kafka pipeline working). Mock interviews start biweekly.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-card" id="phase-3" onclick="togglePhase(3)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#7F77DD"></div>
+        <span class="phase-title">Phase 3 — Python + AI Core Track + Project 2</span>
+        <span class="phase-months">Months 5–6 · Oct–Nov</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>Python + FastAPI</strong>3 weeks intensive: async, type hints, FastAPI patterns</div>
+          <div class="skill-pill"><strong>AI Core Track</strong>LLMs, RAG, embeddings, evaluation (4–5 hrs/week)</div>
+          <div class="skill-pill"><strong>Project 1 complete</strong>Deployed, documented, war stories ready</div>
+          <div class="skill-pill"><strong>Project 2 begins</strong>Doc Intelligence Backend (Python, Qdrant, OpenAI)</div>
+          <div class="skill-pill"><strong>DSA maintenance</strong>45 min/day, timed mocks only</div>
+          <div class="skill-pill"><strong>Mock interviews</strong>2/week — DSA + system design</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Checkpoint:</strong> Python production-capable. AI Core Track complete. Project 1 live. Project 2 ingestion + retrieval working.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-card" id="phase-4" onclick="togglePhase(4)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#BA7517"></div>
+        <span class="phase-title">Phase 4 — Interview Simulation + Project 2 Complete</span>
+        <span class="phase-months">Months 7–8 · Dec–Jan</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>Project 2 complete</strong>LLM generation, semantic cache, eval framework, deployed</div>
+          <div class="skill-pill"><strong>Agentic Track</strong>Weekends only — after Project 2 live</div>
+          <div class="skill-pill"><strong>Mock interviews</strong>15+ total with written feedback</div>
+          <div class="skill-pill"><strong>War stories</strong>6 stories from past job — written + practiced aloud</div>
+          <div class="skill-pill"><strong>Practice applications</strong>3–5 lower-priority companies for calibration</div>
+          <div class="skill-pill"><strong>DSA maintenance</strong>30 min/day only</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Checkpoint:</strong> Both projects live. 15+ mocks done. War stories crisp. Practice interviews give real calibration signal.
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase-card" id="phase-5" onclick="togglePhase(5)">
+      <div class="phase-header">
+        <div class="phase-dot" style="background:#D85A30"></div>
+        <span class="phase-title">Phase 5 — Target Applications + Close</span>
+        <span class="phase-months">Month 9+ · Feb 2027</span>
+        <span class="phase-chevron">▼</span>
+      </div>
+      <div class="phase-body">
+        <div class="focus-label">Focus</div>
+        <div class="skill-grid">
+          <div class="skill-pill"><strong>Apply to targets</strong>Razorpay, Zepto, Juspay, BrowserStack, Atlassian</div>
+          <div class="skill-pill"><strong>Min 3 simultaneous</strong>Never apply sequentially — need competing offers</div>
+          <div class="skill-pill"><strong>Negotiate hard</strong>Never accept on the call. Always counter.</div>
+          <div class="skill-pill"><strong>Floor: 45 LPA</strong>Reject anything below. Your burn is low. You can wait.</div>
+        </div>
+        <div class="checkpoint">
+          <strong>Target close:</strong> Jan–Feb 2027 hiring window. Best window of the year. You land here fully prepared.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Daily Structure -->
+  <div class="section-title">Daily structure</div>
+  <div class="schedule-grid">
+    <div class="sched-card">
+      <div class="sched-day">Weekdays — 2.5 hrs</div>
+      <div class="sched-row"><span class="sched-task">DSA (independent attempt)</span><span class="sched-time">60 min</span></div>
+      <div class="sched-row"><span class="sched-task">HLD / LLD / AI by phase</span><span class="sched-time">60 min</span></div>
+      <div class="sched-row"><span class="sched-task">Review + spaced recall</span><span class="sched-time">20 min</span></div>
+    </div>
+    <div class="sched-card">
+      <div class="sched-day">Weekends — 4 hrs total</div>
+      <div class="sched-row"><span class="sched-task">Project work</span><span class="sched-time">2 hrs</span></div>
+      <div class="sched-row"><span class="sched-task">HLD active reconstruction</span><span class="sched-time">1.5 hrs</span></div>
+      <div class="sched-row"><span class="sched-task">Mock interview / review</span><span class="sched-time">30 min</span></div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section-title">Two projects</div>
+  <div class="projects">
+    <div class="proj-card">
+      <div class="proj-name">Distributed Notification Service</div>
+      <div class="proj-stack">Java · Spring Boot · Kafka · Redis · PostgreSQL</div>
+      <span class="proj-tag" style="background:rgba(29,158,117,0.15);color:var(--teal-l)">Months 4–6</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Kafka pipeline</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Redis dedup</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">CI/CD</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Prometheus + Grafana</span>
+    </div>
+    <div class="proj-card">
+      <div class="proj-name">Intelligent Document Q&A Backend</div>
+      <div class="proj-stack">Python · FastAPI · Qdrant · OpenAI · Redis · PostgreSQL</div>
+      <span class="proj-tag" style="background:var(--blue-d);color:var(--blue-l)">Months 6–8</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">RAG pipeline</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Hybrid search</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Eval framework</span>
+      <span class="proj-tag" style="background:var(--bg3);color:var(--text2)">Semantic cache</span>
+    </div>
+  </div>
+
+  <!-- Risks -->
+  <div class="section-title">Top execution risks</div>
+  <div class="risks">
+    <div class="risk-row"><span class="risk-icon">⚠</span><span class="risk-text"><strong>Over-planning recurrence</strong> — you've now read 8 planning docs. Open LeetCode today, not tomorrow.</span></div>
+    <div class="risk-row"><span class="risk-icon">⚠</span><span class="risk-text"><strong>DSA takes longer than expected</strong> — budget 4 months to get reliable on mediums, not 2. Don't move phases by calendar.</span></div>
+    <div class="risk-row"><span class="risk-icon">⚠</span><span class="risk-text"><strong>Project scope creep</strong> — depth over features. One component you can defend for 15 min beats 5 you can't.</span></div>
+    <div class="risk-row"><span class="risk-icon">⚠</span><span class="risk-text"><strong>No external feedback loop</strong> — mock interviews with written feedback are non-optional. Start by month 3.</span></div>
+    <div class="risk-row"><span class="risk-icon">⚠</span><span class="risk-text"><strong>Accepting below 45 LPA</strong> — your 50k/month burn means you can wait. Never accept the first offer under pressure.</span></div>
+  </div>
+
+  <!-- Switch target -->
+  <div class="switch-target">
+    <div class="st-label">Switch 1 target</div>
+    <div class="st-title">50 LPA · January–February 2027</div>
+    <div class="st-row">
+      <div class="st-item"><strong>Floor:</strong> 45 LPA</div>
+      <div class="st-item"><strong>Target:</strong> 50 LPA</div>
+      <div class="st-item"><strong>Upside:</strong> 55 LPA with competing offers</div>
+      <div class="st-item"><strong>Switch 2:</strong> 62–75 LPA by early 2028</div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}},toggle(ns,id){const d=this.get(ns);d[id]=!d[id];this.set(ns,d);return d[id]},isDone(ns,id){return!!this.get(ns)[id]}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');if(!nav)return;PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});updateBadge()}
+function getProgress(){const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});return{done:d,total:t,pct:Math.round(d/t*100)}}
+function updateBadge(){const b=document.getElementById('nav-badge');if(b){const p=getProgress();b.textContent=p.pct+'%'}}
+
+initNav('roadmap.html');
+function togglePhase(n) {
+  const card = document.getElementById('phase-' + n);
+  card.classList.toggle('open');
+  event.stopPropagation();
+}
+function selectMonth(phaseIndex) {
+  document.querySelectorAll('.tmonth').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.tmonth[data-phase="' + phaseIndex + '"]').forEach(m => m.classList.add('active'));
+  document.querySelectorAll('.phase-card').forEach((c, i) => {
+    c.classList.remove('open');
+    if (i === phaseIndex) c.classList.add('open');
+  });
+  event.stopPropagation();
+}
+</script>
+</body>
+</html>

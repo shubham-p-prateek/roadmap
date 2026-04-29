@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>DSA Tracker — Career Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--coral-l:#F0997B;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.5rem}
+.stat{background:var(--bg3);border-radius:var(--r);padding:12px 14px}
+.slabel{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.sval{font-size:22px;font-weight:600;font-family:'Syne',sans-serif;color:var(--text)}
+.ssub{font-size:11px;color:var(--text3);margin-top:2px}
+.sec{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.ftabs{display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap}
+.ftab{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);cursor:pointer;color:var(--text3);background:transparent;transition:all .15s}
+.ftab:hover{border-color:var(--border2);color:var(--text2)}
+.ftab.on{background:var(--teal-d);border-color:var(--teal);color:var(--teal-l)}
+.pat-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.pat-row{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .15s}
+.pat-row:hover{border-color:var(--border2)}
+.pat-row.done-pat{border-color:rgba(29,158,117,0.35)}
+.pat-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;background:var(--bg2);transition:background .15s}
+.pat-header:hover{background:var(--bg3)}
+.pdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ptitle{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.pcount{font-size:11px;color:var(--text3);min-width:32px;text-align:right}
+.pweek{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;font-family:'DM Mono',monospace}
+.pprog{height:3px;background:var(--border);width:60px;border-radius:2px}
+.pprogb{height:3px;border-radius:2px;transition:width .3s}
+.pchev{font-size:10px;color:var(--text3);transition:transform .2s;margin-left:4px}
+.pat-row.open .pchev{transform:rotate(180deg)}
+.pat-body{display:none;border-top:1px solid var(--border);padding:12px 14px;background:var(--bg3)}
+.pat-row.open .pat-body{display:block}
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:5px;margin-bottom:8px}
+.prob-item{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .15s}
+.prob-item:hover{border-color:var(--border2)}
+.prob-item.done{background:rgba(29,158,117,0.12);border-color:rgba(29,158,117,0.3)}
+.pcheck{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px}
+.prob-item.done .pcheck{background:var(--teal);border-color:var(--teal);color:#fff}
+.pname{font-size:12px;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdiff{font-size:10px;padding:1px 5px;border-radius:8px;font-weight:500;flex-shrink:0}
+.dE{background:rgba(29,158,117,0.2);color:var(--teal-l)}
+.dM{background:rgba(186,117,23,0.2);color:var(--amber-l)}
+.dH{background:rgba(216,90,48,0.2);color:var(--coral-l)}
+.pat-rule{font-size:11px;color:var(--text2);padding:7px 10px;background:var(--bg4);border-left:2px solid var(--teal);border-radius:0 var(--r) var(--r) 0;line-height:1.6}
+.pat-rule strong{color:var(--text);font-weight:500}
+.week-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:1.5rem}
+.week-card{border:1px solid var(--border);border-radius:var(--rl);padding:10px 12px;background:var(--bg2)}
+.wnum{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:4px}
+.wtopic{font-size:13px;font-weight:500;margin-bottom:3px}
+.wtarget{font-size:11px;color:var(--text2);margin-bottom:8px}
+.wbar{height:3px;background:var(--border);border-radius:2px}
+.method-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.ms{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg2)}
+.msn{width:20px;height:20px;border-radius:50%;background:var(--teal-d);color:var(--teal-l);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Mono',monospace}
+.mst{font-size:12px;color:var(--text2);line-height:1.5}
+.mst strong{color:var(--text);font-weight:500}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.rule-card{border:1px solid var(--border);border-radius:var(--rl);padding:10px 12px;background:var(--bg2)}
+.rtitle{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px}
+.rbody{font-size:11px;color:var(--text2);line-height:1.6}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>DSA tracker</h1>
+    <p>152 problems · NeetCode 150 sequenced · Jun – Sep 2026 · Click problems to mark done</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="slabel">Problems done</div><div class="sval" id="total-done">0</div><div class="ssub">of 152 target</div></div>
+    <div class="stat"><div class="slabel">Timeline</div><div class="sval">4 mo</div><div class="ssub">Jun – Sep 2026</div></div>
+    <div class="stat"><div class="slabel">Daily target</div><div class="sval">1–2</div><div class="ssub">problems/day</div></div>
+    <div class="stat"><div class="slabel">Mastery bar</div><div class="sval">70%</div><div class="ssub">mediums unaided</div></div>
+  </div>
+  <div class="sec">Phase filter</div>
+  <div class="ftabs">
+    <div class="ftab on" onclick="filterPhase('all',this)">All phases</div>
+    <div class="ftab" onclick="filterPhase('1',this)">Phase 1 — Jun/Jul</div>
+    <div class="ftab" onclick="filterPhase('2',this)">Phase 2 — Aug/Sep</div>
+    <div class="ftab" onclick="filterPhase('3',this)">Phase 3 — Oct (maintenance)</div>
+  </div>
+  <div class="sec">Patterns &amp; problem list</div>
+  <div class="pat-list" id="pat-list"></div>
+  <div class="sec">Week-by-week targets</div>
+  <div class="week-grid" id="week-grid"></div>
+  <div class="sec">Daily method — non-negotiable</div>
+  <div class="method-steps">
+    <div class="ms"><div class="msn">1</div><div class="mst"><strong>Attempt independently for 25 min.</strong> No hints, no solutions, no peeking at discuss tab.</div></div>
+    <div class="ms"><div class="msn">2</div><div class="mst"><strong>If stuck at 25 min: read approach only</strong> (not code). Close it. Attempt again from scratch.</div></div>
+    <div class="ms"><div class="msn">3</div><div class="mst"><strong>After solving: read the optimal solution</strong> even if yours passed. Ask — why is theirs better?</div></div>
+    <div class="ms"><div class="msn">4</div><div class="mst"><strong>Log every problem:</strong> date, time taken, hints used (0/1/2), pattern identified, one-line note.</div></div>
+    <div class="ms"><div class="msn">5</div><div class="mst"><strong>Never copy-paste solutions.</strong> Type every line. Muscle memory matters in live interviews.</div></div>
+    <div class="ms"><div class="msn">6</div><div class="mst"><strong>Spaced repetition:</strong> re-solve problems where you needed hints after 3 days then 7 days. Mark mastered only when solved cleanly twice.</div></div>
+  </div>
+  <div class="sec">Hard rules</div>
+  <div class="rules">
+    <div class="rule-card"><div class="rtitle">Do not skip order</div><div class="rbody">NeetCode 150 is sequenced intentionally. Arrays before trees. Trees before graphs. Graphs before DP. Jumping ahead causes pattern confusion.</div></div>
+    <div class="rule-card"><div class="rtitle">One resource only</div><div class="rbody">NeetCode 150 + NeetCode video explanations. No switching to AlgoExpert, Striver, or LeetCode Explore. Resource switching is procrastination.</div></div>
+    <div class="rule-card"><div class="rtitle">Move phases by skill, not calendar</div><div class="rbody">If mediums aren't at 70% by week 8, extend Phase 1. Do not advance because the date says so.</div></div>
+    <div class="rule-card"><div class="rtitle">DP scope is limited</div><div class="rbody">Do only the 15 DP problems listed. Advanced DP has poor ROI for your target companies. Resist going deeper.</div></div>
+  </div>
+</div>
+
+<script>
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}},isDone(ns,id){return!!this.get(ns)[id]}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});updateBadge()}
+function getProgress(){const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});return Math.round(d/t*100)}
+function updateBadge(){const b=document.getElementById('nav-badge');if(b)b.textContent=getProgress()+'%'}
+
+const patterns=[
+  {id:'arrays',name:'Arrays + Hashing',color:'#1D9E75',phase:'1',weeks:'Weeks 1–2',count:18,problems:[{n:'Two Sum',d:'E'},{n:'Contains Duplicate',d:'E'},{n:'Valid Anagram',d:'E'},{n:'Group Anagrams',d:'M'},{n:'Top K Frequent Elements',d:'M'},{n:'Product of Array Except Self',d:'M'},{n:'Valid Sudoku',d:'M'},{n:'Encode and Decode Strings',d:'M'},{n:'Longest Consecutive Sequence',d:'M'},{n:'Sort Colors',d:'M'},{n:'Number of Good Pairs',d:'E'},{n:'Intersection of Two Arrays',d:'E'},{n:'Find All Duplicates',d:'M'},{n:'Subarray Sum Equals K',d:'M'},{n:'Majority Element',d:'E'},{n:'Maximum Subarray',d:'M'},{n:'First Missing Positive',d:'H'},{n:'4Sum',d:'M'}],rule:'<strong>Key insight:</strong> HashMap is your default tool. When you see O(n²) brute force, ask "can a HashMap make this O(n)?" every single time.'},
+  {id:'twoptr',name:'Two Pointers + Sliding Window',color:'#1D9E75',phase:'1',weeks:'Weeks 3–4',count:14,problems:[{n:'Valid Palindrome',d:'E'},{n:'Two Sum II',d:'M'},{n:'3Sum',d:'M'},{n:'Container With Most Water',d:'M'},{n:'Trapping Rain Water',d:'H'},{n:'Best Time to Buy Stock',d:'E'},{n:'Longest Substring Without Repeat',d:'M'},{n:'Longest Repeating Char Replacement',d:'M'},{n:'Permutation in String',d:'M'},{n:'Minimum Window Substring',d:'H'},{n:'Sliding Window Maximum',d:'H'},{n:'Fruit Into Baskets',d:'M'},{n:'Max Consecutive Ones III',d:'M'},{n:'Find K Closest Elements',d:'M'}],rule:'<strong>Two pointers:</strong> sorted array + pair/triplet = two pointers. <strong>Sliding window:</strong> subarray/substring with constraint = sliding window.'},
+  {id:'stack',name:'Stack + Binary Search',color:'#1D9E75',phase:'1',weeks:'Weeks 5–6',count:14,problems:[{n:'Valid Parentheses',d:'E'},{n:'Min Stack',d:'M'},{n:'Evaluate Reverse Polish',d:'M'},{n:'Generate Parentheses',d:'M'},{n:'Daily Temperatures',d:'M'},{n:'Car Fleet',d:'M'},{n:'Largest Rectangle in Histogram',d:'H'},{n:'Binary Search',d:'E'},{n:'Search a 2D Matrix',d:'M'},{n:'Koko Eating Bananas',d:'M'},{n:'Find Minimum in Rotated Array',d:'M'},{n:'Search in Rotated Array',d:'M'},{n:'Time Based Key-Value Store',d:'M'},{n:'Median of Two Sorted Arrays',d:'H'}],rule:'<strong>Stack:</strong> "next greater/smaller" = monotonic stack. <strong>Binary search:</strong> anytime the search space is sorted or monotonic — not just sorted arrays.'},
+  {id:'linked',name:'Linked Lists',color:'#1D9E75',phase:'1',weeks:'Weeks 7–8',count:11,problems:[{n:'Reverse Linked List',d:'E'},{n:'Merge Two Sorted Lists',d:'E'},{n:'Reorder List',d:'M'},{n:'Remove Nth Node From End',d:'M'},{n:'Copy List with Random Pointer',d:'M'},{n:'Add Two Numbers',d:'M'},{n:'Linked List Cycle',d:'E'},{n:'Find Duplicate Number',d:'M'},{n:'LRU Cache',d:'M'},{n:'Merge K Sorted Lists',d:'H'},{n:'Reverse Nodes in K-Group',d:'H'}],rule:'<strong>Always draw the pointers</strong> before coding. 90% of linked list bugs are pointer order mistakes. Slow/fast pointer catches cycles and midpoints.'},
+  {id:'trees',name:'Trees + Tries',color:'#378ADD',phase:'2',weeks:'Weeks 9–10',count:22,problems:[{n:'Invert Binary Tree',d:'E'},{n:'Max Depth of Binary Tree',d:'E'},{n:'Diameter of Binary Tree',d:'E'},{n:'Balanced Binary Tree',d:'E'},{n:'Same Tree',d:'E'},{n:'Subtree of Another Tree',d:'E'},{n:'LCA of BST',d:'M'},{n:'BST Iterator',d:'M'},{n:'Count Good Nodes in BT',d:'M'},{n:'Validate BST',d:'M'},{n:'Kth Smallest in BST',d:'M'},{n:'Construct Tree from Preorder+Inorder',d:'M'},{n:'Binary Tree Max Path Sum',d:'H'},{n:'Serialize and Deserialize BT',d:'H'},{n:'Implement Trie',d:'M'},{n:'Design Add Search Words DS',d:'M'},{n:'Word Search II',d:'H'},{n:'Level Order Traversal',d:'M'},{n:'Right Side View',d:'M'},{n:'Good Nodes',d:'M'},{n:'Word Ladder',d:'H'},{n:'Path Sum III',d:'M'}],rule:'<strong>Tree = recursion.</strong> Define: what does this function return? What is the base case? What do I do with left and right subtree results?'},
+  {id:'heap',name:'Heap + Priority Queue',color:'#378ADD',phase:'2',weeks:'Week 11',count:7,problems:[{n:'Kth Largest Element',d:'M'},{n:'Last Stone Weight',d:'E'},{n:'K Closest Points to Origin',d:'M'},{n:'Task Scheduler',d:'M'},{n:'Design Twitter',d:'M'},{n:'Find Median from Data Stream',d:'H'},{n:'IPO',d:'H'}],rule:'<strong>Heap pattern:</strong> "K largest/smallest/frequent" = heap. Max heap for K smallest, min heap for K largest. Java PriorityQueue default is min-heap.'},
+  {id:'graphs',name:'Graphs (BFS + DFS + Union Find)',color:'#BA7517',phase:'2',weeks:'Weeks 12–14',count:22,problems:[{n:'Number of Islands',d:'M'},{n:'Clone Graph',d:'M'},{n:'Max Area of Island',d:'M'},{n:'Pacific Atlantic Water Flow',d:'M'},{n:'Surrounded Regions',d:'M'},{n:'Rotting Oranges',d:'M'},{n:'Walls and Gates',d:'M'},{n:'Course Schedule',d:'M'},{n:'Course Schedule II',d:'M'},{n:'Redundant Connection',d:'M'},{n:'Number of Connected Components',d:'M'},{n:'Graph Valid Tree',d:'M'},{n:'Word Ladder',d:'H'},{n:'Alien Dictionary',d:'H'},{n:'Cheapest Flights Within K Stops',d:'M'},{n:'Network Delay Time',d:'M'},{n:'Swim in Rising Water',d:'H'},{n:'Reconstruct Itinerary',d:'H'},{n:'Min Cost to Connect All Points',d:'M'},{n:'Path with Max Probability',d:'M'},{n:'Find City with Smallest Neighbors',d:'M'},{n:'Keys and Rooms',d:'M'}],rule:'<strong>BFS = shortest path.</strong> <strong>DFS = connected components, cycles.</strong> <strong>Topo sort = dependency ordering.</strong> Label which to use before coding.'},
+  {id:'dp',name:'Dynamic Programming (selective)',color:'#D85A30',phase:'2',weeks:'Weeks 15–16',count:15,problems:[{n:'Climbing Stairs',d:'E'},{n:'House Robber',d:'M'},{n:'House Robber II',d:'M'},{n:'Longest Palindromic Substring',d:'M'},{n:'Palindromic Substrings',d:'M'},{n:'Decode Ways',d:'M'},{n:'Coin Change',d:'M'},{n:'Maximum Product Subarray',d:'M'},{n:'Word Break',d:'M'},{n:'Longest Increasing Subsequence',d:'M'},{n:'Partition Equal Subset Sum',d:'M'},{n:'Target Sum',d:'M'},{n:'Longest Common Subsequence',d:'M'},{n:'Edit Distance',d:'M'},{n:'Burst Balloons',d:'H'}],rule:'<strong>DP = overlapping subproblems.</strong> Ask: "can the answer to a smaller version help me?" Draw the recurrence before coding.'},
+  {id:'intervals',name:'Intervals + Math + Backtracking',color:'#D85A30',phase:'2',weeks:'Week 16',count:14,problems:[{n:'Insert Interval',d:'M'},{n:'Merge Intervals',d:'M'},{n:'Non-overlapping Intervals',d:'M'},{n:'Meeting Rooms',d:'E'},{n:'Meeting Rooms II',d:'M'},{n:'Rotate Image',d:'M'},{n:'Spiral Matrix',d:'M'},{n:'Set Matrix Zeroes',d:'M'},{n:'Happy Number',d:'E'},{n:'Plus One',d:'E'},{n:'Pow(x,n)',d:'M'},{n:'Subsets',d:'M'},{n:'Combination Sum',d:'M'},{n:'Permutations',d:'M'}],rule:'<strong>Intervals:</strong> sort by start time first — almost always. <strong>Backtracking:</strong> "generate all" = backtrack. Template: choose → explore → unchoose.'},
+];
+
+const weeks=[
+  {w:'Week 1',topic:'Arrays + Hashing',target:'9 problems',color:'#1D9E75'},
+  {w:'Week 2',topic:'Arrays + Hashing',target:'9 problems',color:'#1D9E75'},
+  {w:'Week 3',topic:'Two Pointers',target:'7 problems',color:'#1D9E75'},
+  {w:'Week 4',topic:'Sliding Window',target:'7 problems',color:'#1D9E75'},
+  {w:'Week 5',topic:'Stack',target:'7 problems',color:'#1D9E75'},
+  {w:'Week 6',topic:'Binary Search',target:'7 problems',color:'#1D9E75'},
+  {w:'Week 7',topic:'Linked Lists',target:'6 problems',color:'#1D9E75'},
+  {w:'Week 8',topic:'Review + mocks',target:'Re-solve weak spots',color:'#888780'},
+  {w:'Week 9',topic:'Trees',target:'11 problems',color:'#378ADD'},
+  {w:'Week 10',topic:'Trees + Tries',target:'11 problems',color:'#378ADD'},
+  {w:'Week 11',topic:'Heap / PQ',target:'7 problems',color:'#378ADD'},
+  {w:'Week 12',topic:'Graphs BFS/DFS',target:'8 problems',color:'#BA7517'},
+  {w:'Week 13',topic:'Graphs advanced',target:'8 problems',color:'#BA7517'},
+  {w:'Week 14',topic:'Graphs + Topo',target:'6 problems',color:'#BA7517'},
+  {w:'Week 15',topic:'DP fundamentals',target:'8 problems',color:'#D85A30'},
+  {w:'Week 16',topic:'DP + Intervals + BT',target:'21 problems',color:'#D85A30'},
+];
+
+let solved={};
+let currentPhase='all';
+
+function key(patId,name){return patId+'::'+name}
+
+function saveState(){Store.set('dsa',solved)}
+
+function renderPatterns(){
+  const list=document.getElementById('pat-list');
+  list.innerHTML='';
+  patterns.forEach(pat=>{
+    if(currentPhase!=='all'&&pat.phase!==currentPhase)return;
+    const done=pat.problems.filter(p=>solved[key(pat.id,p.n)]).length;
+    const pct=Math.round(done/pat.count*100);
+    const row=document.createElement('div');
+    row.className='pat-row';
+    row.id='pat-'+pat.id;
+    row.innerHTML=`<div class="pat-header" onclick="togglePat('${pat.id}')">
+      <div class="pdot" style="background:${pat.color}"></div>
+      <span class="ptitle">${pat.name}</span>
+      <span class="pcount" id="pc-${pat.id}">${done}/${pat.count}</span>
+      <div class="pprog"><div class="pprogb" id="pb-${pat.id}" style="width:${pct}%;background:${pat.color}"></div></div>
+      <span class="pweek" style="background:${pat.color}22;color:${pat.color}">${pat.weeks}</span>
+      <span class="pchev">▼</span>
+    </div>
+    <div class="pat-body">
+      <div class="prob-grid" id="probs-${pat.id}"></div>
+      <div class="pat-rule">${pat.rule}</div>
+    </div>`;
+    list.appendChild(row);
+    renderProbs(pat);
+  });
+  updateStats();
+}
+
+function renderProbs(pat){
+  const grid=document.getElementById('probs-'+pat.id);
+  if(!grid)return;
+  grid.innerHTML='';
+  pat.problems.forEach(p=>{
+    const k=key(pat.id,p.n);
+    const done=!!solved[k];
+    const el=document.createElement('div');
+    el.className='prob-item'+(done?' done':'');
+    el.onclick=e=>{e.stopPropagation();toggleProb(pat,p)};
+    el.innerHTML=`<div class="pcheck">${done?'&#10003;':''}</div><span class="pname">${p.n}</span><span class="pdiff d${p.d}">${p.d}</span>`;
+    grid.appendChild(el);
+  });
+}
+
+function togglePat(id){document.getElementById('pat-'+id).classList.toggle('open')}
+
+function toggleProb(pat,prob){
+  const k=key(pat.id,prob.n);
+  solved[k]=!solved[k];
+  saveState();
+  renderProbs(pat);
+  const done=pat.problems.filter(p=>solved[key(pat.id,p.n)]).length;
+  const pct=Math.round(done/pat.count*100);
+  const pc=document.getElementById('pc-'+pat.id);
+  const pb=document.getElementById('pb-'+pat.id);
+  if(pc)pc.textContent=done+'/'+pat.count;
+  if(pb)pb.style.width=pct+'%';
+  const row=document.getElementById('pat-'+pat.id);
+  if(row)row.classList.toggle('done-pat',done===pat.count);
+  updateStats();
+  updateBadge();
+}
+
+function filterPhase(phase,el){
+  currentPhase=phase;
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderPatterns();
+}
+
+function updateStats(){
+  const total=Object.values(solved).filter(Boolean).length;
+  document.getElementById('total-done').textContent=total;
+}
+
+function renderWeeks(){
+  const grid=document.getElementById('week-grid');
+  weeks.forEach(w=>{
+    const card=document.createElement('div');
+    card.className='week-card';
+    card.innerHTML=`<div class="wnum">${w.w}</div><div class="wtopic" style="color:${w.color}">${w.topic}</div><div class="wtarget">${w.target}</div><div class="wbar"><div style="height:3px;border-radius:2px;background:${w.color};width:0%"></div></div>`;
+    grid.appendChild(card);
+  });
+}
+
+// Load saved state
+solved=Store.get('dsa');
+initNav('dsa.html');
+renderPatterns();
+renderWeeks();
+</script>
+</body>
+</html>

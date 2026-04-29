@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Daily Plan — Career Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--purple:#7F77DD;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+.sec{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;margin-top:1.5rem}
+.sched-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem}
+.sched-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem}
+.sched-day{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sched-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
+.sched-row:last-child{border-bottom:none}
+.sched-task{font-size:12px;color:var(--text2)}
+.sched-time{font-size:11px;color:var(--text);font-family:'DM Mono',monospace;font-weight:500;background:var(--bg3);padding:2px 8px;border-radius:6px}
+.phase-sched{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.ps-row{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.ps-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer}
+.ps-header:hover{background:var(--bg3)}
+.ps-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ps-title{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.ps-months{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace}
+.ps-chev{font-size:10px;color:var(--text3);transition:transform .2s}
+.ps-row.open .ps-chev{transform:rotate(180deg)}
+.ps-body{display:none;border-top:1px solid var(--border);padding:12px 14px;background:var(--bg3)}
+.ps-row.open .ps-body{display:block}
+.ps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.ps-item{padding:8px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r)}
+.ps-item-label{font-size:11px;color:var(--text3);margin-bottom:2px}
+.ps-item-val{font-size:13px;color:var(--text);font-weight:500}
+.ps-note{font-size:12px;color:var(--text2);padding:8px 10px;background:var(--bg4);border-left:2px solid var(--teal);border-radius:0 var(--r) var(--r) 0;margin-top:10px;line-height:1.6}
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.rule-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:10px 12px}
+.rtitle{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px}
+.rbody{font-size:11px;color:var(--text2);line-height:1.6}
+.target-box{background:var(--teal-d);border:1px solid var(--teal);border-radius:var(--rl);padding:1.2rem 1.4rem;margin-bottom:1.5rem}
+.tb-label{font-size:10px;color:var(--teal-l);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.tb-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:6px}
+.tb-row{display:flex;gap:20px;flex-wrap:wrap}
+.tb-item{font-size:12px;color:var(--text2)}
+.tb-item strong{color:var(--text);font-weight:500}
+@media(max-width:600px){.sched-grid{grid-template-columns:1fr}.rules-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>Daily + weekly plan</h1>
+    <p>Steady-state schedule · Phase-wise focus breakdown · Non-negotiable rules</p>
+  </div>
+
+  <div class="target-box">
+    <div class="tb-label">Daily commitment</div>
+    <div class="tb-val">2–2.5 hrs weekdays · 4 hrs weekends</div>
+    <div class="tb-row">
+      <div class="tb-item"><strong>Weekday start:</strong> Whatever time works — but same time daily</div>
+      <div class="tb-item"><strong>Weekend:</strong> Split across both days, not all Sunday</div>
+      <div class="tb-item"><strong>Floor:</strong> If you miss a day, next day is non-negotiable</div>
+    </div>
+  </div>
+
+  <div class="sec">Steady-state daily structure</div>
+  <div class="sched-grid">
+    <div class="sched-card">
+      <div class="sched-day">Weekdays — 2.5 hrs</div>
+      <div class="sched-row"><span class="sched-task">DSA — independent attempt</span><span class="sched-time">60 min</span></div>
+      <div class="sched-row"><span class="sched-task">HLD / LLD / AI (by phase)</span><span class="sched-time">60 min</span></div>
+      <div class="sched-row"><span class="sched-task">Review + spaced recall</span><span class="sched-time">20 min</span></div>
+      <div class="sched-row"><span class="sched-task">Log progress + plan tomorrow</span><span class="sched-time">10 min</span></div>
+    </div>
+    <div class="sched-card">
+      <div class="sched-day">Weekends — 4 hrs total</div>
+      <div class="sched-row"><span class="sched-task">Project work</span><span class="sched-time">2 hrs</span></div>
+      <div class="sched-row"><span class="sched-task">HLD active reconstruction</span><span class="sched-time">1.5 hrs</span></div>
+      <div class="sched-row"><span class="sched-task">Mock interview / DSA review</span><span class="sched-time">30 min</span></div>
+      <div class="sched-row"><span class="sched-task">Week plan (max 20 min)</span><span class="sched-time">20 min</span></div>
+    </div>
+  </div>
+
+  <div class="sec">Phase-wise focus breakdown</div>
+  <div class="phase-sched" id="phase-sched"></div>
+
+  <div class="sec">Non-negotiable rules</div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rtitle">DSA: 25-minute rule</div><div class="rbody">Attempt every problem independently for 25 min before looking at anything. This is where pattern recognition builds. Skip this and you can only solve problems you've memorised.</div></div>
+    <div class="rule-card"><div class="rtitle">HLD: active reconstruction only</div><div class="rbody">Read once, then close everything and design from scratch. Watching videos repeatedly is not studying. You only own a system when you can design it cold.</div></div>
+    <div class="rule-card"><div class="rtitle">Projects: build, don't plan</div><div class="rbody">Weekend project time is for writing code, not planning what to build. If you spend 45 min deciding what to do next, the session is wasted. Know the next task before you sit down.</div></div>
+    <div class="rule-card"><div class="rtitle">Weekly plan: 20 min max</div><div class="rbody">Sunday evening. What 3 things must happen this week? Write them. Done. Any more planning time is procrastination with extra steps.</div></div>
+    <div class="rule-card"><div class="rtitle">Mock interviews: from month 3</div><div class="rbody">Minimum 2 per week from month 3. Pramp for DSA. Interviewing.io or peer for system design. Record every session. Debrief same day. No exceptions.</div></div>
+    <div class="rule-card"><div class="rtitle">No context switching</div><div class="rbody">Weekday sessions have one DSA block and one HLD/LLD block. Not three things in parallel. Deep work on fewer things beats shallow work on everything.</div></div>
+  </div>
+
+  <div class="sec">DSA maintenance schedule (from month 5)</div>
+  <div class="sched-grid">
+    <div class="sched-card">
+      <div class="sched-day">Maintenance mode</div>
+      <div class="sched-row"><span class="sched-task">Timed mock: 2 problems in 45 min</span><span class="sched-time">45 min</span></div>
+      <div class="sched-row"><span class="sched-task">Review weak patterns only</span><span class="sched-time">15 min</span></div>
+      <div class="sched-row"><span class="sched-task">No new topics — maintenance only</span><span class="sched-time">—</span></div>
+    </div>
+    <div class="sched-card">
+      <div class="sched-day">Interview phase (month 7+)</div>
+      <div class="sched-row"><span class="sched-task">DSA — 30 min daily only</span><span class="sched-time">30 min</span></div>
+      <div class="sched-row"><span class="sched-task">Full mock interview loops</span><span class="sched-time">2/week</span></div>
+      <div class="sched-row"><span class="sched-task">Debrief every interview same day</span><span class="sched-time">same day</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});const b=document.getElementById('nav-badge');if(b)b.textContent=Math.round(d/t*100)+'%'}
+
+const phases=[
+  {title:'Phase 1 — Foundation',months:'Jun – Jul 2026',color:'#1D9E75',items:[
+    {label:'Weekday DSA',val:'60 min · Arrays, Hashing, Two Pointers, Stack, Binary Search'},
+    {label:'Weekday Java refresh',val:'30 min · Month 1 only — collections, concurrency, Spring Boot'},
+    {label:'Weekend',val:'HLD passive reading (DDIA) + LLD cohort work'},
+    {label:'DB + OS sprint',val:'1 dedicated week in month 1 — interview-focused only'},
+  ],note:'No HLD active study yet. No Python. No AI. DSA + Java + LLD only. Resist adding anything else.'},
+  {title:'Phase 2 — HLD Depth + Project 1',months:'Aug – Sep 2026',color:'#378ADD',items:[
+    {label:'Weekday DSA',val:'60 min · Trees, Graphs, DP fundamentals'},
+    {label:'Weekday HLD',val:'60 min · Active reconstruction — design from scratch daily'},
+    {label:'Weekend project',val:'2 hrs · Notification service — Kafka pipeline, Redis, observability'},
+    {label:'Weekend HLD',val:'1.5 hrs · One system deep dive — design cold then verify'},
+    {label:'Mocks start',val:'Biweekly from end of month 4'},
+  ],note:'HLD method is critical: read once, close everything, design cold, find gaps, repeat day 3 and day 7. Passive watching does not count.'},
+  {title:'Phase 3 — Python + AI Core Track + Project 2',months:'Oct – Nov 2026',color:'#7F77DD',items:[
+    {label:'Weekday DSA',val:'45 min · Timed mocks only — maintenance mode'},
+    {label:'Weekday Python/AI',val:'60 min · First 3 weeks Python, then AI Core Track'},
+    {label:'Weekend project',val:'2 hrs · Project 1 complete + Project 2 ingestion pipeline'},
+    {label:'AI Core Track',val:'4–5 hrs/week on weekends — do every project in the course'},
+    {label:'Mocks',val:'2/week — DSA + system design'},
+  ],note:'Python learning is 3 weeks max. Learn by building after that — not structured courses. AI Core Track runs parallel to project work.'},
+  {title:'Phase 4 — Interview Simulation',months:'Dec 2026 – Jan 2027',color:'#BA7517',items:[
+    {label:'Weekday DSA',val:'30 min · Maintenance only — no new topics'},
+    {label:'Weekday prep',val:'60 min · War stories, mock debrief, HLD/LLD revision'},
+    {label:'Weekend project',val:'Complete Project 2 — eval framework, observability, deployment'},
+    {label:'Mocks',val:'2/week with written feedback — track every result'},
+    {label:'Practice applications',val:'3–5 lower-priority companies for real calibration'},
+  ],note:'Every interview debriefed same day. What pattern appeared that you missed? What would you do differently? This is the highest-leverage activity in this phase.'},
+  {title:'Phase 5 — Applications + Close',months:'Jan – Feb 2027',color:'#D85A30',items:[
+    {label:'Primary applications',val:'Razorpay, Zepto, Juspay, BrowserStack, Atlassian — min 3 simultaneous'},
+    {label:'DSA',val:'30 min daily — never let it rust completely'},
+    {label:'Negotiation rule',val:'Never accept on the call. Always ask for 3 days. Always counter.'},
+    {label:'Floor',val:'45 LPA minimum. Your 50k/month burn means you can wait.'},
+  ],note:'Competing offers are the single biggest lever on comp. Apply to 3+ simultaneously, never sequentially. One offer at 52 moves to 62 when you have another at 58.'},
+];
+
+const cont=document.getElementById('phase-sched');
+phases.forEach((ph,i)=>{
+  const row=document.createElement('div');
+  row.className='ps-row';
+  row.id='ps-'+i;
+  row.innerHTML=`<div class="ps-header" onclick="document.getElementById('ps-${i}').classList.toggle('open')">
+    <div class="ps-dot" style="background:${ph.color}"></div>
+    <span class="ps-title">${ph.title}</span>
+    <span class="ps-months">${ph.months}</span>
+    <span class="ps-chev">▼</span>
+  </div>
+  <div class="ps-body">
+    <div class="ps-grid">${ph.items.map(it=>`<div class="ps-item"><div class="ps-item-label">${it.label}</div><div class="ps-item-val">${it.val}</div></div>`).join('')}</div>
+    <div class="ps-note">${ph.note}</div>
+  </div>`;
+  cont.appendChild(row);
+});
+
+initNav('daily.html');
+</script>
+</body>
+</html>

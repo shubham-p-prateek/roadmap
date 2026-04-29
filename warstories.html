@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>War Stories — Career Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--coral-l:#F0997B;--purple:#7F77DD;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+.sec{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;margin-top:1.5rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.5rem}
+.stat{background:var(--bg3);border-radius:var(--r);padding:12px 14px}
+.slabel{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.sval{font-size:22px;font-weight:600;font-family:'Syne',sans-serif;color:var(--text)}
+.ssub{font-size:11px;color:var(--text3);margin-top:2px}
+.story-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.story-card{border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .15s}
+.story-card:hover{border-color:var(--border2)}
+.story-card.done-story{border-color:rgba(29,158,117,0.35)}
+.sh{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;background:var(--bg2);transition:background .15s}
+.sh:hover{background:var(--bg3)}
+.s-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);width:24px;flex-shrink:0}
+.s-title{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.s-src{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.s-status{font-size:11px;color:var(--text3)}
+.s-chev{font-size:10px;color:var(--text3);transition:transform .2s;margin-left:4px}
+.story-card.open .s-chev{transform:rotate(180deg)}
+.sb{display:none;border-top:1px solid var(--border);padding:14px;background:var(--bg3)}
+.story-card.open .sb{display:block}
+.s-inner-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:12px}
+.sitab{font-size:11px;padding:6px 12px;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.sitab:hover{color:var(--text2)}.sitab.on{color:var(--teal-l);border-bottom-color:var(--teal)}
+.sipanel{display:none}.sipanel.on{display:block}
+.s-checklist{display:flex;flex-direction:column;gap:5px}
+.s-check{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg2);cursor:pointer;font-size:12px;color:var(--text2);transition:all .15s}
+.s-check:hover{border-color:var(--border2)}
+.s-check.done{background:rgba(29,158,117,0.12);border-color:rgba(29,158,117,0.3)}
+.cbox{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;margin-top:1px}
+.s-check.done .cbox{background:var(--teal);border-color:var(--teal);color:#fff}
+.s-template{font-size:12px;color:var(--text2);line-height:1.7}
+.s-template strong{color:var(--text);font-weight:500;display:block;margin-top:8px;margin-bottom:2px}
+.s-template strong:first-child{margin-top:0}
+.tip-box{font-size:12px;color:var(--text2);padding:8px 10px;background:var(--bg4);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;line-height:1.6;margin-top:10px}
+.tip-box strong{color:var(--text);font-weight:500}
+.format-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1.5rem}
+.format-step{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border)}
+.format-step:last-child{border-bottom:none}
+.fnum{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal-l);width:20px;flex-shrink:0;margin-top:2px}
+.ftext{font-size:12px;color:var(--text2);line-height:1.5}
+.ftext strong{color:var(--text);font-weight:500}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>War stories</h1>
+    <p>12 stories from your 7 years — written, practiced aloud, ready to deliver. This is what makes you a senior candidate.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="slabel">Stories ready</div><div class="sval" id="stories-done">0</div><div class="ssub">of 12 total</div></div>
+    <div class="stat"><div class="slabel">From job</div><div class="sval">6</div><div class="ssub">past experience</div></div>
+    <div class="stat"><div class="slabel">From projects</div><div class="sval">6</div><div class="ssub">P1 + P2 build</div></div>
+    <div class="stat"><div class="slabel">Practice target</div><div class="sval">3x</div><div class="ssub">each aloud</div></div>
+  </div>
+
+  <div class="sec">Story format — use this for every story</div>
+  <div class="format-card">
+    <div class="format-step"><div class="fnum">S</div><div class="ftext"><strong>Situation:</strong> Context in 2 sentences. What was the system, what was the scale, what was the team?</div></div>
+    <div class="format-step"><div class="fnum">T</div><div class="ftext"><strong>Task:</strong> What specifically was your responsibility? Not the team's — yours.</div></div>
+    <div class="format-step"><div class="fnum">A</div><div class="ftext"><strong>Action:</strong> What did you do? Be specific — what did you investigate, decide, build, change? This is 60% of the story.</div></div>
+    <div class="format-step"><div class="fnum">R</div><div class="ftext"><strong>Result:</strong> Quantify if possible. Latency reduced by X%. Incidents reduced from N/month to M. Cost saved Y. If no numbers, describe the outcome clearly.</div></div>
+    <div class="format-step"><div class="fnum">L</div><div class="ftext"><strong>Learning:</strong> What would you do differently? This signals maturity. One sentence is enough.</div></div>
+  </div>
+
+  <div class="sec">Stories from your job (6)</div>
+  <div class="story-list" id="job-stories"></div>
+
+  <div class="sec">Stories from your projects (6)</div>
+  <div class="story-list" id="proj-stories"></div>
+</div>
+
+<script>
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});const b=document.getElementById('nav-badge');if(b)b.textContent=Math.round(d/t*100)+'%'}
+
+const jobStories=[
+  {id:'j1',title:'A system I designed — decisions and tradeoffs',src:'Past job',color:'#1D9E75',
+    checks:['Written in STAR-L format','Specific technical decisions explained (DB choice, API design, scaling approach)','Tradeoffs articulated — why not the alternative?','Result quantified (latency, throughput, uptime, cost)','Practiced aloud 3 times — under 4 minutes'],
+    template:'What was the system? What scale did it handle? What was the most non-obvious design decision you made and why? What would you change if rebuilding today?',
+    tip:'The tradeoff explanation is everything. "We chose Kafka because..." followed by "we considered X but rejected it because..." is what separates senior from mid-level.'},
+  {id:'j2',title:'A production incident I owned — diagnosis and fix',src:'Past job',color:'#1D9E75',
+    checks:['Timeline of events written down','Root cause clearly identified — not just symptoms','Your specific actions: what you checked, what you ruled out, what fixed it','Result: MTTR, recurrence, system improvement after','Practiced aloud 3 times — under 4 minutes'],
+    template:'What failed? How did you detect it? What was your debugging process? What was the root cause? What did you change to prevent recurrence?',
+    tip:'Interviewers love "I was wrong about the root cause initially — here is what misled me and how I corrected course." It shows how you actually think under pressure.'},
+  {id:'j3',title:'A technical decision I pushed back on',src:'Past job',color:'#1D9E75',
+    checks:['Context of original proposal explained','Your concern articulated clearly — technical, not political','How you raised it (data, prototype, alternative proposal)','Outcome — did you win, lose, or compromise? All are fine.','Practiced aloud 3 times'],
+    template:'What was proposed? Why did you disagree? How did you raise it? What happened? What did you learn about influencing without authority?',
+    tip:'This story tests whether you can have technical opinions and back them with reasoning, not just defer. The outcome matters less than the reasoning quality.'},
+  {id:'j4',title:'A performance or scaling problem I solved',src:'Past job',color:'#1D9E75',
+    checks:['Problem stated with numbers (latency p99, throughput, error rate)','Debugging process: what tools, what metrics, what you found','Solution: specific change made','Result: before vs after numbers','Practiced aloud 3 times'],
+    template:'What was the symptom? How did you measure it? What did you investigate? What was the bottleneck? What did you change and what was the measured improvement?',
+    tip:'If you have no numbers, estimate from memory. "Approximately X" is better than "I don\'t remember the exact figure." Precision signals you cared about measurement.'},
+  {id:'j5',title:'Something I built that I\'m most proud of',src:'Past job',color:'#1D9E75',
+    checks:['What made it technically interesting','Your specific contribution vs team contribution','What problem it solved for the user or business','Why you\'re proud — technical elegance, impact, or learning','Practiced aloud 3 times'],
+    template:'What was it? What was technically hard about it? What was your specific role? What was the impact? What did you learn?',
+    tip:'This question reveals what you value as an engineer. Pick something where your pride is technical (elegant design, hard problem solved) not just successful delivery.'},
+  {id:'j6',title:'Something I would build differently today',src:'Past job',color:'#1D9E75',
+    checks:['Specific system or decision named','What you did and why it seemed right at the time','What you now know that changes your view','What you would do instead — specific, not vague','Practiced aloud 3 times'],
+    template:'What was the system? What decision are you second-guessing? What would you do differently and why? What does this show about how your thinking has evolved?',
+    tip:'This is a gift of a question. It shows self-awareness and growth. Answer it confidently — not defensively. "I would do X differently because I now understand Y" is the frame.'},
+];
+
+const projStories=[
+  {id:'p1a',title:'Why Kafka over direct HTTP in Project 1',src:'Project 1',color:'#378ADD',
+    checks:['Technical reasoning clear: async, timeout prevention, retry, decoupling','Alternative considered and rejected with reason','Measured result: what latency/throughput did you achieve?','Practiced aloud 3 times'],
+    template:'Document processing takes 30–60 seconds. Synchronous would timeout. Kafka gives async processing, natural retry, and the Java service stays responsive. Here is how it works end to end...',
+    tip:'This is not just "Kafka is good." The reason is about the specific problem: slow processing + need for reliability + decoupling of producers and consumers.'},
+  {id:'p1b',title:'Load test failure in Project 1 — what broke and why',src:'Project 1',color:'#378ADD',
+    checks:['Ran actual load test at 1000 events/min','Identified what broke: consumer lag, memory, latency spike, or other','Root cause found','Fix implemented and measured','Practiced aloud 3 times'],
+    template:'During load testing at 1000 events/minute, consumer lag spiked to X seconds. I investigated using Grafana metrics and found... The root cause was... I fixed it by... After the fix, lag stayed below Y seconds.',
+    tip:'This story only works if you actually run the load test. Schedule it — it is one of the highest-value prep activities you will do.'},
+  {id:'p1c',title:'Retry logic and DLQ design decisions',src:'Project 1',color:'#378ADD',
+    checks:['Retry strategy explained: exponential backoff with jitter, why jitter?','DLQ purpose: what goes there, how is it monitored, how is it replayed?','Idempotency: how do you ensure replayed messages don\'t cause duplicates?','Practiced aloud 3 times'],
+    template:'When a channel handler fails, we retry 3 times with exponential backoff and jitter. Jitter prevents thundering herd when a provider recovers. After 3 failures the event goes to the DLQ. The DLQ is monitored and can be replayed manually or automatically after the provider recovers.',
+    tip:'Jitter explanation specifically impresses interviewers. Most candidates say "exponential backoff" — fewer explain why you add jitter on top.'},
+  {id:'p2a',title:'Why hybrid search over pure vector search in Project 2',src:'Project 2',color:'#7F77DD',
+    checks:['Concrete example of what vector search misses (exact terms, product codes, names)','How BM25 complements it','How results are merged and deduplicated','Measured quality improvement from adding BM25','Practiced aloud 3 times'],
+    template:'Vector search finds semantically similar chunks but misses exact keyword matches — product IDs, technical terms, proper nouns. BM25 catches those. Hybrid merge of both gives better retrieval quality across document types. I measured this using my eval framework — retrieval recall improved from X% to Y%.'},
+  {id:'p2b',title:'Eval framework — how I measure retrieval quality',src:'Project 2',color:'#7F77DD',
+    checks:['Ground truth dataset explained: 20 Q&A pairs, how they were created','Retrieval recall metric: does correct chunk appear in top-5?','Answer correctness: LLM-as-judge or exact match','What the eval revealed — what surprised you?','Practiced aloud 3 times'],
+    template:'I built a simple eval framework with 20 ground truth Q&A pairs from my own documents. For each query I measure retrieval recall — whether the correct chunk appears in the top-5 retrieved. I also measure answer correctness using an LLM judge. Running this after each change tells me whether quality improved or regressed.',
+    tip:'The eval framework is your biggest differentiator for AI Engineer roles. Most candidates cannot answer "how do you know your system works?" Have real numbers.'},
+  {id:'p2c',title:'Semantic caching — design and measured impact',src:'Project 2',color:'#7F77DD',
+    checks:['How semantic cache works: embedding hash → Redis key, similarity threshold','TTL decision and reasoning','Measured cache hit rate in testing','Measured latency and cost reduction','Practiced aloud 3 times'],
+    template:'Semantic caching hashes query embeddings and checks Redis before hitting the LLM. Similar queries (cosine similarity above threshold T) return the cached response. In testing I achieved X% cache hit rate which reduced LLM costs by approximately Y% and p95 latency from Zms to Wms.',
+    tip:'Real numbers here are 10x more impressive than theoretical claims. Run test queries, measure the hit rate, calculate actual cost savings from your OpenAI usage logs.'},
+];
+
+let wsState={};
+
+function saveState(){Store.set('ws',wsState)}
+
+function renderStories(stories,containerId){
+  const cont=document.getElementById(containerId);
+  stories.forEach((s,idx)=>{
+    const allChecks=s.checks.every((_,i)=>wsState[s.id+'-'+i]);
+    const doneCount=s.checks.filter((_,i)=>wsState[s.id+'-'+i]).length;
+    const card=document.createElement('div');
+    card.className='story-card'+(allChecks?' done-story':'');
+    card.id='sc-'+s.id;
+    const curTab=wsState['tab-'+s.id]||'checklist';
+    card.innerHTML=`
+      <div class="sh" onclick="toggleStory('${s.id}')">
+        <span class="s-num">${String(idx+1).padStart(2,'0')}</span>
+        <span class="s-title">${s.title}</span>
+        <span class="s-src" style="background:${s.color}22;color:${s.color}">${s.src}</span>
+        <span class="s-status">${doneCount}/${s.checks.length}</span>
+        <span class="s-chev">▼</span>
+      </div>
+      <div class="sb">
+        <div class="s-inner-tabs">
+          <div class="sitab ${curTab==='checklist'?'on':''}" onclick="switchStoryTab('${s.id}','checklist',event)">Checklist</div>
+          <div class="sitab ${curTab==='template'?'on':''}" onclick="switchStoryTab('${s.id}','template',event)">Story prompt</div>
+        </div>
+        <div class="sipanel ${curTab==='checklist'?'on':''}" id="sp-${s.id}-checklist">
+          <div class="s-checklist">${s.checks.map((c,i)=>`
+            <div class="s-check ${wsState[s.id+'-'+i]?'done':''}" id="ck-${s.id}-${i}" onclick="toggleCheck('${s.id}',${i})">
+              <div class="cbox">${wsState[s.id+'-'+i]?'&#10003;':''}</div>
+              <span>${c}</span>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div class="sipanel ${curTab==='template'?'on':''}" id="sp-${s.id}-template">
+          <div class="s-template">${s.template}</div>
+          ${s.tip?`<div class="tip-box"><strong>Tip:</strong> ${s.tip}</div>`:''}
+        </div>
+      </div>`;
+    cont.appendChild(card);
+  });
+}
+
+function toggleStory(id){document.getElementById('sc-'+id).classList.toggle('open')}
+
+function switchStoryTab(id,tab,e){
+  e.stopPropagation();
+  wsState['tab-'+id]=tab;
+  const card=document.getElementById('sc-'+id);
+  card.querySelectorAll('.sitab').forEach(t=>t.classList.remove('on'));
+  card.querySelectorAll('.sipanel').forEach(p=>p.classList.remove('on'));
+  e.target.classList.add('on');
+  const panel=card.querySelector('#sp-'+id+'-'+tab);
+  if(panel)panel.classList.add('on');
+}
+
+function toggleCheck(storyId,idx){
+  const k=storyId+'-'+idx;
+  wsState[k]=!wsState[k];
+  saveState();
+  const el=document.getElementById('ck-'+storyId+'-'+idx);
+  if(el){el.classList.toggle('done',wsState[k]);el.querySelector('.cbox').innerHTML=wsState[k]?'&#10003;':''}
+  const allStories=[...jobStories,...projStories];
+  const s=allStories.find(x=>x.id===storyId);
+  if(s){
+    const doneCount=s.checks.filter((_,i)=>wsState[storyId+'-'+i]).length;
+    const allDone=doneCount===s.checks.length;
+    const card=document.getElementById('sc-'+storyId);
+    if(card){
+      card.classList.toggle('done-story',allDone);
+      const statusEl=card.querySelector('.s-status');
+      if(statusEl)statusEl.textContent=doneCount+'/'+s.checks.length;
+    }
+  }
+  updateStats();
+  updateBadge();
+}
+
+function updateStats(){
+  const allStories=[...jobStories,...projStories];
+  const done=allStories.filter(s=>s.checks.every((_,i)=>wsState[s.id+'-'+i])).length;
+  document.getElementById('stories-done').textContent=done;
+}
+
+function updateBadge(){
+  const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};
+  let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});
+  const b=document.getElementById('nav-badge');if(b)b.textContent=Math.round(d/t*100)+'%';
+}
+
+wsState=Store.get('ws');
+initNav('warstories.html');
+renderStories(jobStories,'job-stories');
+renderStories(projStories,'proj-stories');
+updateStats();
+</script>
+</body>
+</html>

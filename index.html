@@ -1,33 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Roadmap Viewer</title>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Career Roadmap — Dashboard</title>
 <style>
-body {
-    background: #0f172a;
-    color: #e2e8f0;
-    font-family: Arial;
-    padding: 20px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--amber:#BA7517;--coral:#D85A30;--coral-l:#F0997B;--purple:#7F77DD;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}.nav-links::-webkit-scrollbar{display:none}
+.nl{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nl:hover{color:var(--text2)}.nl.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}.nbadge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.hero{padding:2.5rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem}
+.hlabel{font-size:11px;color:var(--teal-l);letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:12px}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:10px}
+.hero h1 span{color:var(--teal-l)}
+.hero p{color:var(--text2);font-size:14px;max-width:520px;line-height:1.7}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:1.2rem}
+.badge{font-size:11px;padding:4px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--text2);font-family:'DM Mono',monospace}
+.badge.main{background:var(--teal-d);border-color:var(--teal);color:var(--teal-l)}
+.prog-wrap{margin:1.5rem 0 2rem}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.prog-top span{font-size:12px;color:var(--text3)}
+.prog-top strong{font-family:'Syne',sans-serif;font-size:30px}
+.prog-bar{height:5px;background:var(--border);border-radius:3px}
+.prog-fill{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .8s}
+.prog-sub{display:flex;justify-content:space-between;margin-top:5px}
+.prog-sub span{font-size:11px;color:var(--text3)}
+.sec{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:2rem}
+.nc{display:block;padding:1rem 1.2rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);transition:all .2s}
+.nc:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-1px)}
+.nct{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.nci{font-size:16px}.ncp{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3)}
+.nctitle{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;margin-bottom:3px}
+.ncsub{font-size:11px;color:var(--text3)}
+.ncbar{margin-top:10px;height:3px;background:var(--border);border-radius:2px}
+.ncfill{height:3px;border-radius:2px;transition:width .4s}
+.tl-wrap{margin-bottom:2rem;overflow-x:auto}
+.tl{display:flex;min-width:700px}
+.tli{flex:1}
+.tll{display:flex;align-items:center;margin-bottom:6px}
+.tld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tlc{flex:1;height:1px;background:var(--border)}
+.tlm{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:2px}
+.tlp{font-size:11px;color:var(--text2);line-height:1.3}
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:2rem}
+.swc{padding:1.2rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl)}
+.swc.hi{border-color:var(--teal);background:var(--teal-d)}
+.swnum{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;margin-bottom:4px}
+.swlabel{font-size:12px;color:var(--text2);margin-bottom:8px}
+.swdetail{font-size:11px;color:var(--text3);line-height:1.6}
+.risks{display:flex;flex-direction:column;gap:6px}
+.risk{display:flex;gap:10px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);font-size:12px;color:var(--text2)}
+.rn{font-family:'DM Mono',monospace;font-size:10px;color:var(--coral-l);flex-shrink:0;margin-top:2px}
 </style>
 </head>
-
 <body>
-
-<h1>🚀 Roadmap</h1>
-
-<div id="content">Loading...</div>
-
+<nav class="nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nbadge" id="nbadge">0%</span></div>
+</nav>
+<div class="page">
+  <div class="hero">
+    <div class="hlabel">Senior Backend + AI Engineer</div>
+    <h1>Your path to<br><span>50 LPA</span></h1>
+    <p>9 months. Java, DSA, HLD/LLD, Python, AI Core Track, 2 production projects. No shortcuts.</p>
+    <div class="badges">
+      <span class="badge main">Target: 50 LPA · Jan 2027</span>
+      <span class="badge">Switch 1 floor: 45 LPA</span>
+      <span class="badge">Switch 2: 65+ LPA · 2028</span>
+      <span class="badge">Current: 34 LPA</span>
+    </div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-top"><span>Overall progress</span><strong id="opct">0%</strong></div>
+    <div class="prog-bar"><div class="prog-fill" id="ofill" style="width:0%"></div></div>
+    <div class="prog-sub"><span id="osub">0 of 282 tasks complete</span><span>Started: May 2026</span></div>
+  </div>
+  <div class="sec">Sections</div>
+  <div class="grid" id="sgrid"></div>
+  <div class="sec">Timeline — May 2026 to Feb 2027</div>
+  <div class="tl-wrap"><div class="tl" id="tl"></div></div>
+  <div class="sec">Two-switch strategy</div>
+  <div class="sw-grid">
+    <div class="swc hi"><div class="swnum" style="color:var(--teal-l)">50 LPA</div><div class="swlabel">Switch 1 — Jan 2027</div><div class="swdetail">Razorpay, Zepto, Juspay, BrowserStack, Atlassian. Floor: 45 LPA. Never accept below. Your 50k burn means you can wait.</div></div>
+    <div class="swc"><div class="swnum" style="color:var(--blue-l)">65+ LPA</div><div class="swlabel">Switch 2 — Early 2028</div><div class="swdetail">Sarvam AI, Krutrim, Google India, Stripe India. After 12 months of production AI engineering. This is where 65+ becomes probable.</div></div>
+  </div>
+  <div class="sec">Top execution risks</div>
+  <div class="risks">
+    <div class="risk"><span class="rn">01</span><span>Over-planning recurrence — you have read enough plans. Open LeetCode today, not tomorrow.</span></div>
+    <div class="risk"><span class="rn">02</span><span>DSA takes 4 months to get reliable on mediums. Move phases by competence, not calendar.</span></div>
+    <div class="risk"><span class="rn">03</span><span>Project scope creep — one component you can defend for 15 min beats 5 you cannot.</span></div>
+    <div class="risk"><span class="rn">04</span><span>No external feedback loop — mock interviews with written feedback are non-optional from month 3.</span></div>
+    <div class="risk"><span class="rn">05</span><span>Accepting below 45 LPA — your 50k/month burn means you can wait. Never accept under pressure.</span></div>
+  </div>
+</div>
 <script>
-fetch('roadmap.md')
-  .then(res => res.text())
-  .then(md => {
-      document.getElementById('content').innerHTML = marked.parse(md);
-  });
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+const nav=document.getElementById('nav-links');
+PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nl'+(p.href==='index.html'?' active':'');a.textContent=p.label;nav.appendChild(a)});
+const sections=[
+  {href:'dsa.html',title:'DSA',sub:'152 problems · 4 months',icon:'◈',ns:'dsa',total:152,color:'var(--teal)'},
+  {href:'hld-lld.html',title:'HLD + LLD',sub:'8 systems + 10 designs',icon:'◎',ns:'hld',total:58,color:'var(--blue)'},
+  {href:'project1.html',title:'Project 1',sub:'Notification service · Java',icon:'◆',ns:'p1',total:28,color:'var(--teal)'},
+  {href:'project2.html',title:'Project 2',sub:'Document Q&A · Python + AI',icon:'◇',ns:'p2',total:32,color:'var(--blue)'},
+  {href:'roadmap.html',title:'Roadmap',sub:'Phase-by-phase plan',icon:'▸',ns:null,total:0,color:'var(--amber)'},
+  {href:'daily.html',title:'Daily plan',sub:'Schedule + rules',icon:'◉',ns:null,total:0,color:'var(--purple)'},
+  {href:'warstories.html',title:'War stories',sub:'12 stories · job + projects',icon:'◑',ns:'ws',total:12,color:'var(--coral)'},
+];
+const grid=document.getElementById('sgrid');
+sections.forEach(s=>{
+  const done=s.ns?Object.values(Store.get(s.ns)).filter(Boolean).length:0;
+  const pct=s.total?Math.round(done/s.total*100):0;
+  const c=document.createElement('a');c.href=s.href;c.className='nc';
+  c.innerHTML=`<div class="nct"><span class="nci" style="color:${s.color}">${s.icon}</span><span class="ncp">${s.total?pct+'%':''}</span></div><div class="nctitle">${s.title}</div><div class="ncsub">${s.sub}</div>${s.total?`<div class="ncbar"><div class="ncfill" style="width:${pct}%;background:${s.color}"></div></div>`:''}`;
+  grid.appendChild(c);
+});
+const tl=document.getElementById('tl');
+[{m:'May',ph:'Setup',c:'#888780'},{m:'Jun',ph:'DSA+Java',c:'#1D9E75'},{m:'Jul',ph:'DSA+LLD',c:'#1D9E75'},{m:'Aug',ph:'HLD+P1',c:'#378ADD'},{m:'Sep',ph:'HLD+P1',c:'#378ADD'},{m:'Oct',ph:'Python+AI',c:'#BA7517'},{m:'Nov',ph:'AI+P2',c:'#BA7517'},{m:'Dec',ph:'Interviews',c:'#D85A30'},{m:'Jan',ph:'Apply',c:'#D85A30'},{m:'Feb',ph:'Close',c:'#7F77DD'}].forEach((t,i,arr)=>{
+  const d=document.createElement('div');d.className='tli';
+  d.innerHTML=`<div class="tll"><div class="tld" style="background:${t.c}"></div>${i<arr.length-1?'<div class="tlc"></div>':''}</div><div class="tlm">${t.m}</div><div class="tlp">${t.ph}</div>`;
+  tl.appendChild(d);
+});
+const ns=['dsa','hld','lld','p1','p2','ws'],tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};
+let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});
+const pct=Math.round(d/t*100);
+document.getElementById('opct').textContent=pct+'%';
+document.getElementById('ofill').style.width=pct+'%';
+document.getElementById('osub').textContent=d+' of '+t+' tasks complete';
+document.getElementById('nbadge').textContent=pct+'%';
 </script>
-
 </body>
 </html>

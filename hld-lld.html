@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HLD + LLD — Career Roadmap</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+:root{--bg:#0a0a0b;--bg2:#111113;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#f0efe8;--text2:#9997a0;--text3:#55535e;--teal:#1D9E75;--teal-l:#5DCAA5;--teal-d:rgba(29,158,117,0.12);--blue:#378ADD;--blue-l:#85B7EB;--blue-d:rgba(55,138,221,0.12);--amber:#BA7517;--amber-l:#EF9F27;--coral:#D85A30;--coral-l:#F0997B;--purple:#7F77DD;--purple-l:#AFA9EC;--r:8px;--rl:12px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Syne',sans-serif}
+a{color:inherit;text-decoration:none}
+.site-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,11,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;height:50px;gap:0}
+.nav-brand{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-right:1.5rem;white-space:nowrap}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{font-size:11px;color:var(--text3);padding:0 12px;height:50px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.nav-link:hover{color:var(--text2)}
+.nav-link.active{color:var(--text);border-bottom-color:var(--teal)}
+.nav-right{margin-left:auto}
+.nav-badge{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--teal-d);color:var(--teal-l);font-family:'DM Mono',monospace}
+.page{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.page-header{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px}
+.page-header p{color:var(--text2);font-size:13px}
+
+
+*{box-sizing:border-box;margin:0;padding:0}
+.w{padding:1rem 0;font-family:'DM Sans',sans-serif}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.5rem}
+.stat{background:var(--bg3);border-radius:var(--r);padding:10px 12px}
+.slabel{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.sval{font-size:20px;font-weight:500;color:var(--text)}
+.ssub{font-size:11px;color:var(--text2);margin-top:2px}
+.sec{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.tabs{display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{font-size:12px;padding:5px 12px;border-radius:var(--r);border:0.5px solid var(--border);cursor:pointer;color:var(--text2);background:var(--bg2);transition:all .15s}
+.tab:hover{background:var(--bg3)}
+.tab.on{background:var(--blue-d);color:var(--blue-l);border-color:rgba(55,138,221,0.4)}
+.cards{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.card{border:0.5px solid var(--border);border-radius:var(--rl);overflow:hidden}
+.card.done-card{border-color:rgba(29,158,117,0.35)}
+.ch{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;background:var(--bg2)}
+.ch:hover{background:var(--bg3)}
+.cdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.ctitle{font-size:13px;font-weight:500;color:var(--text);flex:1}
+.cweek{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500}
+.cprog{height:3px;background:var(--border);width:70px;border-radius:2px}
+.cprogb{height:3px;border-radius:2px;transition:width .3s}
+.cchev{font-size:10px;color:var(--text3);transition:transform .2s;margin-left:4px}
+.card.open .cchev{transform:rotate(180deg)}
+.cbody{display:none;border-top:0.5px solid var(--border)}
+.card.open .cbody{display:block}
+.ctabs{display:flex;border-bottom:0.5px solid var(--border)}
+.ctab{font-size:11px;padding:6px 12px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.ctab.on{color:var(--blue-l);border-bottom-color:var(--blue-l)}
+.ctab:hover{background:var(--bg3)}
+.cpanel{display:none;padding:12px 14px}
+.cpanel.on{display:block}
+.cq-list{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.cq{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);padding:5px 8px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .15s}
+.cq:hover{border-color:var(--border2)}
+.cq.done{background:rgba(29,158,117,0.15);border-color:rgba(29,158,117,0.35)}
+.cq-check{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;margin-top:1px}
+.cq.done .cq-check{background:var(--teal-l);border-color:var(--teal-l);color:#fff}
+.cq-text{flex:1;line-height:1.4}
+.cq-text strong{font-weight:500;color:var(--text)}
+.method-box{font-size:12px;color:var(--text2);padding:8px 10px;border-left:2px solid var(--border2);border-radius:0 4px 4px 0;background:var(--bg3);line-height:1.6;margin-bottom:6px}
+.method-box strong{color:var(--text);font-weight:500}
+.lld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.lld-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .15s}
+.lld-item:hover{border-color:var(--border2)}
+.lld-item.done{background:rgba(29,158,117,0.15);border-color:rgba(29,158,117,0.35)}
+.lld-check{width:14px;height:14px;border-radius:3px;border:1px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px}
+.lld-item.done .lld-check{background:var(--teal-l);border-color:var(--teal-l);color:#fff}
+.lld-name{font-size:12px;color:var(--text)}
+.pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;margin:2px 2px 0 0}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.rule-card{border:0.5px solid var(--border);border-radius:var(--rl);padding:10px 12px;background:var(--bg2)}
+.rule-title{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px}
+.rule-body{font-size:11px;color:var(--text2);line-height:1.6}
+.method-steps{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.ms{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2)}
+.msn{width:20px;height:20px;border-radius:50%;background:var(--blue-d);color:var(--blue-l);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mst{font-size:12px;color:var(--text2);line-height:1.5}
+.mst strong{color:var(--text);font-weight:500}
+
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-brand">Roadmap '26</div>
+  <div class="nav-links" id="nav-links"></div>
+  <div class="nav-right"><span class="nav-badge" id="nav-badge">0%</span></div>
+</nav>
+<div class="page">
+<div class="page-header">
+  <h1>HLD + LLD tracker</h1>
+  <p>8 HLD systems to master · 10 LLD systems to code · Aug – Sep 2026</p>
+</div>
+<div class="w">
+<h2 class="sr-only">HLD and LLD study tracker with clickable systems, tradeoff questions, and progress tracking</h2>
+
+<div class="stats">
+  <div class="stat"><div class="slabel">HLD systems</div><div class="sval" id="hld-done">0</div><div class="ssub">of 8 mastered</div></div>
+  <div class="stat"><div class="slabel">LLD systems</div><div class="sval" id="lld-done">0</div><div class="ssub">of 10 coded</div></div>
+  <div class="stat"><div class="slabel">HLD timeline</div><div class="sval">8 wk</div><div class="ssub">Aug – Sep 2026</div></div>
+  <div class="stat"><div class="slabel">LLD timeline</div><div class="sval">10 wk</div><div class="ssub">Jun – Sep 2026</div></div>
+</div>
+
+<div class="sec">HLD — 8 systems to master</div>
+<div class="tabs">
+  <div class="tab on" onclick="filterHLD('all',this)">All</div>
+  <div class="tab" onclick="filterHLD('foundational',this)">Foundational</div>
+  <div class="tab" onclick="filterHLD('feed',this)">Feed + messaging</div>
+  <div class="tab" onclick="filterHLD('infra',this)">Infrastructure</div>
+</div>
+<div class="cards" id="hld-cards"></div>
+
+<div class="sec">HLD study method — active reconstruction only</div>
+<div class="method-steps">
+  <div class="ms"><div class="msn">1</div><div class="mst"><strong>Read once.</strong> Use Alex Xu (Vol 1+2) or Arpit Bhayani videos. One pass, take rough notes.</div></div>
+  <div class="ms"><div class="msn">2</div><div class="mst"><strong>Close everything.</strong> Open blank doc. Design the full system from scratch — capacity, API, data model, components, scaling.</div></div>
+  <div class="ms"><div class="msn">3</div><div class="mst"><strong>Identify gaps.</strong> Go back to resource only for what you missed. Not the whole thing.</div></div>
+  <div class="ms"><div class="msn">4</div><div class="mst"><strong>Repeat day 3 and day 7.</strong> Re-design from memory. Mark mastered only when you can do it cleanly twice with no reference.</div></div>
+  <div class="ms"><div class="msn">5</div><div class="mst"><strong>For each system answer all tradeoff questions</strong> (see per-system checklist). If you can't — you haven't mastered it yet.</div></div>
+</div>
+
+<div class="sec">LLD — 10 systems to code</div>
+<div class="cards" id="lld-cards"></div>
+
+<div class="sec">LLD coding rules</div>
+<div class="rule-grid">
+  <div class="rule-card"><div class="rule-title">Write actual code, not pseudocode</div><div class="rule-body">Every LLD system must be coded in Java. Interfaces, classes, enums — the real thing. Diagrams alone will not pass interviews at strong companies.</div></div>
+  <div class="rule-card"><div class="rule-title">SOLID before clever</div><div class="rule-body">Single responsibility per class. Open for extension. Strategy pattern over if-else chains. Interviewers test whether you write extensible code, not just working code.</div></div>
+  <div class="rule-card"><div class="rule-title">Extensibility questions</div><div class="rule-body">After every design ask: "If I needed to add X, how much would change?" If the answer is "a lot" — your abstractions are wrong. Redesign.</div></div>
+  <div class="rule-card"><div class="rule-title">No cohort hand-holding after month 2</div><div class="rule-body">From month 3 onward, design each system independently before looking at any reference. The cohort is scaffolding, not the destination.</div></div>
+</div>
+
+</div>
+</div>
+<script>
+
+const Store={get(k){try{return JSON.parse(localStorage.getItem('rm_'+k)||'{}')}catch{return{}}},set(k,v){try{localStorage.setItem('rm_'+k,JSON.stringify(v))}catch{}},toggle(ns,id){const d=this.get(ns);d[id]=!d[id];this.set(ns,d);return d[id]},isDone(ns,id){return!!this.get(ns)[id]}};
+const PAGES=[{href:'index.html',label:'Dashboard'},{href:'dsa.html',label:'DSA'},{href:'hld-lld.html',label:'HLD + LLD'},{href:'project1.html',label:'Project 1'},{href:'project2.html',label:'Project 2'},{href:'roadmap.html',label:'Roadmap'},{href:'daily.html',label:'Daily plan'},{href:'warstories.html',label:'War stories'}];
+function initNav(active){const nav=document.getElementById('nav-links');if(!nav)return;PAGES.forEach(p=>{const a=document.createElement('a');a.href=p.href;a.className='nav-link'+(p.href===active?' active':'');a.textContent=p.label;nav.appendChild(a)});updateBadge()}
+function getProgress(){const ns=['dsa','hld','lld','p1','p2','ws'];const tot={dsa:152,hld:48,lld:10,p1:28,p2:32,ws:12};let d=0,t=0;ns.forEach(n=>{const data=Store.get(n);d+=Object.values(data).filter(Boolean).length;t+=tot[n]});return{done:d,total:t,pct:Math.round(d/t*100)}}
+function updateBadge(){const b=document.getElementById('nav-badge');if(b){const p=getProgress();b.textContent=p.pct+'%'}}
+
+initNav('hld-lld.html');
+const hldSystems = [
+  {
+    id:'url', name:'URL shortener', cat:'foundational', color:'#1D9E75', week:'Week 1 (Aug)',
+    done: false,
+    questions:[
+      {q:'How do you generate a short code — hash vs counter vs base62? What are the collision risks?', done:false},
+      {q:'How do you handle 100M URLs and 10B redirects/day — what does your capacity estimate look like?', done:false},
+      {q:'Where does caching sit and what is the eviction policy? Why not cache at DB layer?', done:false},
+      {q:'How do you handle custom aliases and expiry? Where is this stored?', done:false},
+      {q:'How do you scale the redirect service to sub-10ms p99? What does your data model look like?', done:false},
+      {q:'What happens if your counter service goes down? How do you avoid single point of failure?', done:false}
+    ],
+    components:['API gateway','Hash/counter service','Redirect service','Cache (Redis)','DB (MySQL/Cassandra)','Analytics pipeline'],
+    method:'Read → design cold → gap check → re-design day 3 and day 7'
+  },
+  {
+    id:'rate', name:'Rate limiter', cat:'foundational', color:'#1D9E75', week:'Week 1 (Aug)',
+    done: false,
+    questions:[
+      {q:'Fixed window vs sliding window vs token bucket vs leaky bucket — when do you pick each?', done:false},
+      {q:'How do you implement a distributed rate limiter across multiple API servers?', done:false},
+      {q:'What is the race condition in a naive Redis incr implementation and how do you fix it?', done:false},
+      {q:'How do you handle the "burst at boundary" problem in fixed window?', done:false},
+      {q:'Where does the rate limiter sit — client, gateway, or service? Tradeoffs of each?', done:false},
+      {q:'How do you rate limit per user, per IP, per endpoint simultaneously?', done:false}
+    ],
+    components:['API gateway middleware','Redis counter store','Token bucket algorithm','Config service','Response headers (X-RateLimit)'],
+    method:'This is a deep HLD topic — interviewers often go 45 min on this alone. Know all 4 algorithms cold.'
+  },
+  {
+    id:'notif', name:'Notification service', cat:'foundational', color:'#1D9E75', week:'Week 2 (Aug)',
+    done: false,
+    questions:[
+      {q:'How do you guarantee at-least-once delivery across email, SMS, push? What is your retry strategy?', done:false},
+      {q:'How do you handle deduplication — same event triggering duplicate notifications?', done:false},
+      {q:'How do you handle 1M notifications/minute without overwhelming downstream providers?', done:false},
+      {q:'What happens when the email provider is down for 2 hours — how does your system behave?', done:false},
+      {q:'How do you implement per-user notification preferences (opt-out per channel per type)?', done:false},
+      {q:'How do you prioritize urgent notifications (OTP) over bulk marketing ones?', done:false}
+    ],
+    components:['Event ingestion API','Kafka topics (per channel)','Channel handlers (email/SMS/push)','DLQ for failures','Dedup store (Redis)','User preference service'],
+    method:'This system maps directly to your Project 1. Build the HLD before you build the code.'
+  },
+  {
+    id:'paste', name:'Pastebin / file store', cat:'foundational', color:'#1D9E75', week:'Week 2 (Aug)',
+    done: false,
+    questions:[
+      {q:'How do you store large blobs efficiently — DB vs object storage? What is the size threshold?', done:false},
+      {q:'How do you generate unique paste IDs at scale without coordination?', done:false},
+      {q:'How do you handle expiry — do you delete eagerly or lazily? What are the tradeoffs?', done:false},
+      {q:'How do you implement access control — public, private, password-protected?', done:false},
+      {q:'What does your CDN strategy look like for read-heavy content?', done:false}
+    ],
+    components:['Upload API','Object storage (S3)','Metadata DB (MySQL)','CDN layer','Expiry job (cron/event)'],
+    method:'Simpler system — use it to practice capacity estimation and CDN discussion depth.'
+  },
+  {
+    id:'twitter', name:'Twitter / social feed', cat:'feed', color:'#378ADD', week:'Week 3 (Aug)',
+    done: false,
+    questions:[
+      {q:'Fan-out on write vs fan-out on read — when do you use each? What is the celebrity problem?', done:false},
+      {q:'How do you generate a home timeline for a user with 10,000 followers they follow?', done:false},
+      {q:'How do you rank tweets — chronological vs engagement-based? What data do you need?', done:false},
+      {q:'How do you handle a celebrity with 50M followers posting — what breaks and how do you fix it?', done:false},
+      {q:'How do you store and query tweets efficiently — what is your DB choice and schema?', done:false},
+      {q:'How do you implement infinite scroll with consistent pagination?', done:false}
+    ],
+    components:['Post service','Fan-out service','Timeline cache (Redis sorted set)','User graph service','Media service (CDN)','Feed ranking service'],
+    method:'Fan-out on write vs read is the core tradeoff — this comes up in almost every feed system interview.'
+  },
+  {
+    id:'chat', name:'WhatsApp / chat system', cat:'feed', color:'#378ADD', week:'Week 3 (Aug)',
+    done: false,
+    questions:[
+      {q:'How do you maintain persistent WebSocket connections at 1B users? What does your connection service look like?', done:false},
+      {q:'How do you guarantee message ordering within a conversation?', done:false},
+      {q:'How do you deliver messages to offline users — push notification flow?', done:false},
+      {q:'How do you implement read receipts (delivered, read) at scale?', done:false},
+      {q:'How do you handle group messages with 1000 members efficiently?', done:false},
+      {q:'What storage do you use for messages — why not a relational DB?', done:false}
+    ],
+    components:['WebSocket connection service','Message service','Kafka (message queue)','Cassandra (message store)','Presence service','Push notification service'],
+    method:'WebSocket connection management and message delivery guarantees are the hardest parts. Go deep here.'
+  },
+  {
+    id:'youtube', name:'YouTube / video platform', cat:'infra', color:'#BA7517', week:'Week 4 (Sep)',
+    done: false,
+    questions:[
+      {q:'How does video transcoding work — what is your pipeline from upload to playback?', done:false},
+      {q:'How do you implement adaptive bitrate streaming (HLS)? What does the client do?', done:false},
+      {q:'How do you distribute video globally — what is your CDN strategy?', done:false},
+      {q:'How do you handle a viral video that gets 10M views in 1 hour?', done:false},
+      {q:'How do you implement video recommendations — what signals do you use?', done:false},
+      {q:'What is your storage strategy — hot vs warm vs cold for old videos?', done:false}
+    ],
+    components:['Upload service','Transcoding pipeline (async)','Object storage (S3)','CDN (CloudFront)','Metadata DB','Recommendation service','View counter (Redis + async persist)'],
+    method:'Transcoding pipeline is the unique complexity here. Understand DAG-based processing (like AWS MediaConvert).'
+  },
+  {
+    id:'cache', name:'Distributed cache (Redis-like)', cat:'infra', color:'#BA7517', week:'Week 4 (Sep)',
+    done: false,
+    questions:[
+      {q:'How do you partition data across cache nodes — consistent hashing vs hash slots?', done:false},
+      {q:'What are the cache eviction policies — LRU vs LFU vs FIFO — when do you pick each?', done:false},
+      {q:'How do you handle cache stampede / thundering herd when a hot key expires?', done:false},
+      {q:'What is cache-aside vs write-through vs write-behind — tradeoffs of each?', done:false},
+      {q:'How do you handle cache invalidation — the hardest problem in distributed systems?', done:false},
+      {q:'How do you implement a distributed lock using Redis? What are the failure modes?', done:false}
+    ],
+    components:['Cache nodes (sharded)','Consistent hash ring','Replication (primary-replica)','Eviction manager','Client-side library','Monitoring + alerting'],
+    method:'This is pure distributed systems depth. Every tradeoff question here maps to real system design discussions.'
+  }
+];
+
+const lldSystems = [
+  {name:'Parking lot', phase:'Month 1', done:false, focus:'OOP basics, strategy pattern for pricing'},
+  {name:'LRU cache', phase:'Month 1', done:false, focus:'HashMap + doubly linked list, O(1) ops'},
+  {name:'Splitwise', phase:'Month 2', done:false, focus:'Debt simplification, graph reduction algorithm'},
+  {name:'URL shortener', phase:'Month 2', done:false, focus:'Clean service layer, interface-based design'},
+  {name:'Notification system', phase:'Month 2', done:false, focus:'Strategy pattern per channel, observer pattern'},
+  {name:'Hotel booking', phase:'Month 3', done:false, focus:'Concurrency, optimistic locking, availability calendar'},
+  {name:'Ride-sharing dispatch', phase:'Month 3', done:false, focus:'Location matching, state machine for trip lifecycle'},
+  {name:'Snake and ladder', phase:'Month 3', done:false, focus:'Clean game loop, extensible board design'},
+  {name:'Chess / board game', phase:'Month 4', done:false, focus:'Piece hierarchy, move validation, command pattern'},
+  {name:'In-memory DB (simplified)', phase:'Month 4', done:false, focus:'Indexing, query parsing, transaction basics'}
+];
+
+let hldQ = {};
+let lldDone = {};
+let ctabState = {};
+let hldFilter = 'all';
+
+function filterHLD(cat, el){
+  hldFilter = cat;
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  renderHLD();
+}
+
+function renderHLD(){
+  const cont = document.getElementById('hld-cards');
+  cont.innerHTML = '';
+  hldSystems.forEach(sys => {
+    if(hldFilter !== 'all' && sys.cat !== hldFilter) return;
+    const doneQs = sys.questions.filter((q,i) => hldQ[sys.id+'-'+i]).length;
+    const pct = Math.round(doneQs/sys.questions.length*100);
+    const allDone = doneQs === sys.questions.length;
+    const card = document.createElement('div');
+    card.className = 'card' + (allDone?' done-card':'');
+    card.id = 'hcard-'+sys.id;
+    const curTab = ctabState[sys.id] || 'tradeoffs';
+    card.innerHTML = `
+      <div class="ch" onclick="toggleCard('hcard-${sys.id}','${sys.id}')">
+        <div class="cdot" style="background:${sys.color}"></div>
+        <span class="ctitle">${sys.name}</span>
+        <span class="cweek" style="background:${sys.color}22;color:${sys.color}">${sys.week}</span>
+        <div class="cprog"><div class="cprogb" id="prog-${sys.id}" style="width:${pct}%;background:${sys.color}"></div></div>
+        <span style="font-size:11px;color:var(--color-text-tertiary);min-width:28px">${doneQs}/${sys.questions.length}</span>
+        <span class="cchev">&#9660;</span>
+      </div>
+      <div class="cbody">
+        <div class="ctabs">
+          <div class="ctab ${curTab==='tradeoffs'?'on':''}" onclick="switchTab('${sys.id}','tradeoffs',event)">Tradeoff questions</div>
+          <div class="ctab ${curTab==='components'?'on':''}" onclick="switchTab('${sys.id}','components',event)">Components</div>
+          <div class="ctab ${curTab==='method'?'on':''}" onclick="switchTab('${sys.id}','method',event)">Study note</div>
+        </div>
+        <div class="cpanel ${curTab==='tradeoffs'?'on':''}" id="${sys.id}-tradeoffs">
+          <div class="cq-list">${sys.questions.map((q,i)=>`
+            <div class="cq ${hldQ[sys.id+'-'+i]?'done':''}" onclick="toggleQ('${sys.id}',${i})">
+              <div class="cq-check">${hldQ[sys.id+'-'+i]?'&#10003;':''}</div>
+              <div class="cq-text">${q.q}</div>
+            </div>`).join('')}
+          </div>
+        </div>
+        <div class="cpanel ${curTab==='components'?'on':''}" id="${sys.id}-components">
+          <div style="display:flex;flex-wrap:wrap;gap:5px;padding:4px 0">${sys.components.map(c=>`<span class="pill" style="background:${sys.color}22;color:${sys.color}">${c}</span>`).join('')}</div>
+        </div>
+        <div class="cpanel ${curTab==='method'?'on':''}" id="${sys.id}-method">
+          <div class="method-box">${sys.method}</div>
+        </div>
+      </div>`;
+    cont.appendChild(card);
+  });
+  updateStats();
+}
+
+function toggleCard(cardId, sysId){
+  const card = document.getElementById(cardId);
+  card.classList.toggle('open');
+}
+
+function switchTab(sysId, tab, e){
+  e.stopPropagation();
+  ctabState[sysId] = tab;
+  const card = document.getElementById('hcard-'+sysId);
+  if(!card) return;
+  card.querySelectorAll('.ctab').forEach(t => t.classList.remove('on'));
+  card.querySelectorAll('.cpanel').forEach(p => p.classList.remove('on'));
+  e.target.classList.add('on');
+  const panel = card.querySelector('#'+sysId+'-'+tab);
+  if(panel) panel.classList.add('on');
+}
+
+function toggleQ(sysId, idx){
+  const key = sysId+'-'+idx;
+  hldQ[key] = !hldQ[key];
+  const sys = hldSystems.find(s => s.id===sysId);
+  const doneQs = sys.questions.filter((q,i) => hldQ[sysId+'-'+i]).length;
+  const pct = Math.round(doneQs/sys.questions.length*100);
+  const allDone = doneQs === sys.questions.length;
+  const card = document.getElementById('hcard-'+sysId);
+  if(!card) return;
+  const progBar = document.getElementById('prog-'+sysId);
+  if(progBar) progBar.style.width = pct+'%';
+  const cqList = card.querySelectorAll('.cq');
+  cqList.forEach((el,i) => {
+    const k = sysId+'-'+i;
+    el.classList.toggle('done', !!hldQ[k]);
+    el.querySelector('.cq-check').innerHTML = hldQ[k] ? '&#10003;' : '';
+  });
+  const countEl = card.querySelector('span[style*="min-width:28px"]');
+  if(countEl) countEl.textContent = doneQs+'/'+sys.questions.length;
+  card.classList.toggle('done-card', allDone);
+  updateStats();
+}
+
+function renderLLD(){
+  const cont = document.getElementById('lld-cards');
+  cont.innerHTML = '';
+  const phaseMap = {};
+  lldSystems.forEach((s,i) => {
+    if(!phaseMap[s.phase]) phaseMap[s.phase] = [];
+    phaseMap[s.phase].push({...s,idx:i});
+  });
+  Object.entries(phaseMap).forEach(([phase, items]) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.id = 'lcard-'+phase.replace(/\s/g,'-');
+    const doneCount = items.filter(it => lldDone[it.idx]).length;
+    card.innerHTML = `
+      <div class="ch" onclick="toggleCard('lcard-${phase.replace(/\s/g,'-')}','')">
+        <div class="cdot" style="background:#7F77DD"></div>
+        <span class="ctitle">${phase}</span>
+        <span class="cweek" style="background:#EEEDFE;color:#534AB7">${doneCount}/${items.length} coded</span>
+        <span class="cchev">&#9660;</span>
+      </div>
+      <div class="cbody">
+        <div style="padding:12px 14px">
+          <div class="lld-grid">${items.map(it=>`
+            <div class="lld-item ${lldDone[it.idx]?'done':''}" id="lld-${it.idx}" onclick="toggleLLD(${it.idx},'lcard-${phase.replace(/\s/g,'-')}')">
+              <div class="lld-check">${lldDone[it.idx]?'&#10003;':''}</div>
+              <div>
+                <div class="lld-name">${it.name}</div>
+                <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:2px">${it.focus}</div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+    cont.appendChild(card);
+  });
+}
+
+function toggleLLD(idx, cardId){
+  lldDone[idx] = !lldDone[idx];
+  const el = document.getElementById('lld-'+idx);
+  if(el){
+    el.classList.toggle('done', lldDone[idx]);
+    el.querySelector('.lld-check').innerHTML = lldDone[idx] ? '&#10003;' : '';
+  }
+  const card = document.getElementById(cardId);
+  if(card){
+    const phase = lldSystems[idx].phase;
+    const items = lldSystems.map((s,i)=>({...s,idx:i})).filter(s=>s.phase===phase);
+    const doneCount = items.filter(it=>lldDone[it.idx]).length;
+    const badge = card.querySelector('.cweek');
+    if(badge) badge.textContent = doneCount+'/'+items.length+' coded';
+  }
+  updateStats();
+}
+
+function updateStats(){
+  const hldMastered = hldSystems.filter(s => s.questions.every((_,i)=>hldQ[s.id+'-'+i])).length;
+  const lldCount = Object.values(lldDone).filter(Boolean).length;
+  document.getElementById('hld-done').textContent = hldMastered;
+  document.getElementById('lld-done').textContent = lldCount;
+}
+
+renderHLD();
+renderLLD();
+// localStorage persistence
+function saveHLD(){Store.set('hld',hldQ)}
+function saveLLD(){Store.set('lld',lldDone)}
+
+// Load saved state
+const _savedHLD=Store.get('hld');
+Object.assign(hldQ,_savedHLD);
+const _savedLLD=Store.get('lld');
+Object.assign(lldDone,_savedLLD);
+
+// Patch toggleQ to save
+const _origToggleQ=toggleQ;
+window.toggleQ=function(sysId,idx){_origToggleQ(sysId,idx);saveHLD();updateBadge()};
+const _origToggleLLD=toggleLLD;
+window.toggleLLD=function(idx,cardId){_origToggleLLD(idx,cardId);saveLLD();updateBadge()};
+
+renderPatterns();
+renderLLD();
+
+</script>
+</body>
+</html>
